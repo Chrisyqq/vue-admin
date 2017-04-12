@@ -4,7 +4,7 @@
 
 
         <el-row :gutter="20">
-            哈哈哈哈
+            <barChart></barChart>
         </el-row>
 
 
@@ -19,11 +19,11 @@
 </template>
 
 <script>
-
+    import barChart from '../charts/barChart.vue';
     import vPageTitle from '../common/pageTitle.vue';
     export default {
         components:{
-          vPageTitle
+          barChart,vPageTitle
         },
         methods: {
         }

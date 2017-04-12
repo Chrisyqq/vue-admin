@@ -1,11 +1,16 @@
 <template>
     <div class="pageTitle">
-        <div class="pt-left"><h2>{{vtitle.toUpperCase()}}</h2></div>
-        <div class="pt-right">
-            <span class="pt-Home"><router-link to="homePage">首页</router-link></span>
-            <span class="pt-line"> / </span>
-            <span class="pt-page">{{vtitle}}</span>
-        </div>
+        <el-row>
+            <el-col :span="24">
+                <div class="grid-content dx-edit-pd bg-purple-dark">
+                    <el-breadcrumb separator="/">
+                        <el-breadcrumb-item :to="{ path: '/' }"><router-link to="homePage">首页</router-link></el-breadcrumb-item>
+                        <el-breadcrumb-item>{{vtitle}}</el-breadcrumb-item>
+                    </el-breadcrumb>
+                </div>
+            </el-col>
+        </el-row>
+
     </div>
 </template>
 <script>
@@ -19,11 +24,14 @@
         height:55px;
 
     }
-    .pt-left{
-        float:left;
+    .bg-purple-dark {
+        background: #e5e9f2;
     }
-    .pt-right{
-        float:right;
+    .dx-edit-pd{
+        padding: 14px;
+    }
+    .grid-content {
+        border-radius: 4px;
     }
     .pt-Home{
         font-size:20px;
