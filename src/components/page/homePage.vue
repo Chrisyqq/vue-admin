@@ -9,7 +9,10 @@
                         <div v-for="grid in item.list" class="Grid-cell" v-bind:style="{height: grid.height + 'px' ,flex: grid.width,}">
                             <el-button v-if="grid.singerSmall === 'true'" type="primary" size="small" @click.active="singerSmallClick">最小化</el-button>
                             <el-button v-if="grid.multipleSmall === 'true'" type="primary" size="small" @click.active="multipleSmallClick">最小化</el-button>
-                            <parent v-bind:my-message="grid.name"></parent>
+                            <keep-alive>
+                              <component :is="grid.name">
+                              </component>
+                            </keep-alive>
                         </div>
                     </div>
                 </div>
@@ -25,6 +28,9 @@
 
 <script>
     import barChart from '../charts/barChart.vue';
+    import todoList from '../todoList/TodoList.vue';
+    import radarChart from '../charts/radarChart.vue';
+    import pieChart from '../charts/pieChart.vue';
     import vPageTitle from '../common/pageTitle.vue';
     import homePage from '../page/homePage.vue';
     export default {
@@ -33,29 +39,21 @@
                 {
                     list:[
                         {
-                            width : '80',
-                            height : '100',
+                            width : '50',
+                            height : '450',
                             singerSmall : 'false',
                             multipleSmall : 'false',
                             color: "green",
-                            name: "barChart"
+                            name: "todoList"
                         },
                         {
-                            width : '10',
-                            height : '100',
+                            width : '50',
+                            height : '450',
                             singerSmall : 'false',
                             multipleSmall : 'true',
                             color: "pink",
-                            name: "barChart"
+                            name: "radarChart"
 
-                        },
-                        {
-                            width : '10',
-                            height : '100',
-                            singerSmall : 'false',
-                            multipleSmall : 'true',
-                            color: "black",
-                            name: "barChart"
                         }
                     ],
                     show: "false"
@@ -65,35 +63,19 @@
                     list:[
                         {
                             width : '1',
-                            height : '100',
+                            height : '450',
                             singerSmall : 'false',
                             multipleSmall : 'true',
                             color: "green",
-                            name: "barChart"
+                            name: "radarChart"
                         },
                         {
-                            width : '2',
-                            height : '100',
+                            width : '1',
+                            height : '450',
                             singerSmall : 'false',
                             multipleSmall : 'true',
                             color: "pink",
-                            name: "barChart"
-                        },
-                        {
-                            width : '3',
-                            height : '100',
-                            singerSmall : 'false',
-                            multipleSmall : 'true',
-                            color: "black",
-                            name: "barChart"
-                        },
-                        {
-                            width : '3',
-                            height : '100',
-                            singerSmall : 'false',
-                            multipleSmall : 'true',
-                            color: "black",
-                            name: "barChart"
+                            name: "pieChart"
                         }
                     ],
                     show: "false"
@@ -102,7 +84,7 @@
                     list:[
                         {
                             width : '2',
-                            height : '100',
+                            height : '450',
                             singerSmall : 'true',
                             multipleSmall : 'false',
                             color: "green",
@@ -115,10 +97,7 @@
             ]
         }),
         components:{
-            vPageTitle, homePage,barChart,
-            parent:{
-                template: '<barChart></barChart>'
-            }
+            vPageTitle, homePage,barChart,pieChart,radarChart,todoList
         },
         methods: {
             singerSmallClick: function (event) {
@@ -247,6 +226,7 @@
         height: 30px;
         border-radius: 5px;
         background: #ffffff;
+        overflow: hidden;
         margin-left: 10px;
         -webkit-transition: height 0.2s ease,flex 0.2s ease; /* For Safari 3.1 to 6.0 */
         transition: height 0.2s ease,flex 0.2s ease;
@@ -255,7 +235,7 @@
         -webkit-transition: flex 0.2s ease; /* For Safari 3.1 to 6.0 */
         transition: flex 0.2s ease;
         flex: none !important;
-        /*width: 50px !important;*/
+        width: 50px !important;
     }
     .Grid-height-none{
         -webkit-transition: height 0.2s ease; /* For Safari 3.1 to 6.0 */
