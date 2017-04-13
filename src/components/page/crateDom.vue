@@ -9,23 +9,83 @@
                 </div>
             </el-col>
         </el-row>
+
         <el-row :gutter="20">
             <el-col :span="18">
                 <div class="create-page">
                     <div class="create-page-head">
                         <span>账单分析(bill_analysis)</span>
-                        <el-button type="success" size="mini">保存并发布</el-button>
+                        <el-button type="success" size="mini">修改名称与编码</el-button>
                     </div>
                     <div class="create-page-body">
-                        <draggable element="span" v-model="list2" :options="dragOptions" :move="onMove">
-                            <transition-group name="no" class="list-group" tag="ul">
-                                <li class="list-group-item" v-for="element in list2" :key="element.order">
-                                    <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
-                                    {{element.name}}
-                                    <span class="badge">{{element.order}}</span>
-                                </li>
-                            </transition-group>
-                        </draggable>
+                        <h2>List 1</h2>
+                        <draggable id="list2" :list="list2" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                            <div class="Grid-cell" v-for="(element, index)  in list2"  :key="index">
+                                {{element.name}}
+                                <el-button class="set-btn" @click="dialogVisible = true" type="success" size="mini">设置</el-button>
+                                <el-button class="del-btn" v-on:click="removeJob(list2,index)" type="success" size="mini">删除</el-button>
+                                <keep-alive>
+                                  <component :is="element.name">
+                                  </component>
+                                </keep-alive>
+                            </div>
+                         </draggable>
+
+                        <h2>List 2</h2>
+                        <draggable id="list3" :list="list3" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                            <div class="Grid-cell" v-for="(element, index)  in list3"  :key="index">
+                                {{element.name}}
+                                <el-button class="set-btn" @click="dialogVisible = true" type="success" size="mini">设置</el-button>
+                                <el-button class="del-btn" v-on:click="removeJob(list3,index)" type="success" size="mini">删除</el-button>
+                                <keep-alive>
+                                  <component :is="element.name">
+                                  </component>
+                                </keep-alive>
+                            </div>
+                         </draggable>
+
+                        <h2>List 3</h2>
+                        <draggable id="list4" :list="list4" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                            <div class="Grid-cell" v-for="(element, index)  in list4"  :key="index">
+                                {{element.name}}
+                                <el-button class="set-btn" @click="dialogVisible = true" type="success" size="mini">设置</el-button>
+
+                                <el-button class="del-btn" v-on:click="removeJob(list4,index)" type="success" size="mini">删除</el-button>
+                                <keep-alive>
+                                  <component :is="element.name">
+                                  </component>
+                                </keep-alive>
+                            </div>
+                         </draggable>
+
+                        <el-dialog title="客户信息设置" v-model="dialogVisible" size="tiny">
+                            <el-tabs v-model="activeName" @tab-click="handleClick">
+                                <el-tab-pane label="UI" name="first">
+                                    <el-row :gutter="20">
+                                        <el-col :span="8"><el-input v-model="input" placeholder="请输入内容"></el-input></el-col>
+                                        <el-col :span="8"><el-input v-model="input" placeholder="请输入内容"></el-input></el-col>
+                                    </el-row>
+                                    <el-row :gutter="20">
+                                        <el-col :span="6"><el-checkbox v-model="checked">备选项</el-checkbox></el-col>
+                                        <el-col :span="6"><el-checkbox v-model="checked">备选项</el-checkbox></el-col>
+                                    </el-row>
+                                    <el-row :gutter="20">
+                                        <el-col :span="6"><el-color-picker v-model="color1"></el-color-picker></el-col>
+                                        <el-col :span="6"><el-color-picker v-model="color1"></el-color-picker></el-col>
+                                    </el-row>
+                                </el-tab-pane>
+                                <el-tab-pane label="配置管理" name="second">
+
+                                </el-tab-pane>
+                                <el-tab-pane label="锚点" name="third">
+
+                                </el-tab-pane>
+                            </el-tabs>
+                            <span slot="footer" class="dialog-footer">
+                                <el-button @click="dialogVisible = false">取 消</el-button>
+                                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                            </span>
+                        </el-dialog>
                     </div>
                 </div>
             </el-col>
@@ -36,19 +96,17 @@
                     </div>
                     <div class="widget-warehouse-body">
                         <el-input v-model="input" placeholder="请输入内容"></el-input>
-                        <draggable class="list-group" element="ul" v-model="list" :options="dragOptions" :move="onMove" @start="isDragging=true" @end="isDragging=false">
-                            <transition-group type="transition" :name="'flip-list'">
-                                <li class="list-group-item" v-for="element in list" :key="element.order">
-                                    <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=element.fixed" aria-hidden="true"></i>
-                                    {{element.name}}
-                                    <span class="badge">{{element.order}}</span>
-                                </li>
-                            </transition-group>
-                        </draggable>
+                        <draggable id="list1" :list="list1" class="dragArea widget-warehouse-list" :options="{group:{name:'people', pull:'clone', put:false }}" @change="log">
+                            <div class="widget-warehouse-list-item" v-for="(element, index) in list1"  :key="index">
+                                {{element.name}} {{index}}
+                            </div>
+                         </draggable>
                     </div>
                 </div>
+
             </el-col>
         </el-row>
+
     </div>
 
 
@@ -56,64 +114,63 @@
 </template>
 
 <script>
-    import draggable from 'vuedraggable'
     import barChart from '../charts/barChart.vue';
+    import todoList from '../todoList/TodoList.vue';
+    import radarChart from '../charts/radarChart.vue';
+    import pieChart from '../charts/pieChart.vue';
+    import dxAlertBoxSet from '../alertBox/dxAlertBoxSet.vue';
+    import draggable from 'vuedraggable';
     import vPageTitle from '../common/pageTitle.vue';
-    const message = [ 'vue.draggable', 'draggable', 'component', 'for', 'vue.js 2.0', 'based' , 'on', 'Sortablejs' ]
     export default {
-        data () {
-            return {
-                list: message.map( (name,index) => {return {name, order: index+1, fixed: false}; }),
-                list2:[],
-                editable:true,
-                isDragging: false,
-                delayedDragging:false
-            }
-        },
+        data: () => ({
+            list1:[{name:"barChart", id:1},
+                    {name:"todoList", id:2},
+                    {name:"radarChart", id:3},
+                    {name:"pieChart", id:4} ],
+            list2:[{name:"pieChart", id:5},
+                    {name:"todoList", id:6},
+                    {name:"todoList", id:7} ],
+            list3:[{name:"pieChart", id:8},
+                    {name:"todoList", id:9},
+                    {name:"todoList", id:10} ],
+            list4:[{name:"todoList", id:8},
+                    {name:"todoList", id:9},
+                    {name:"pieChart", id:10} ],
+            dialogVisible: false,
+        }),
         components:{
-          barChart,vPageTitle,draggable
+          barChart,todoList,radarChart,pieChart,vPageTitle,draggable
         },
         methods: {
-          orderList () {
-              this.list = this.list.sort((one,two) =>{return one.order-two.order; })
+            add: function(){
+                this.list.push({name:'Juan'});
             },
-            onMove ({relatedContext, draggedContext}) {
-              const relatedElement = relatedContext.element;
-              const draggedElement = draggedContext.element;
-              return (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
-            }
-        },
-         computed: {
-            dragOptions () {
-              return  {
-                animation: 0,
-                group: 'description',
-                disabled: !this.editable,
-                ghostClass: 'ghost'
-              };
+            replace: function(){
+                this.list=[{name:'Edgard'}]
             },
-            listString(){
-              return JSON.stringify(this.list, null, 2);
+            clone: function(el){
+                return {
+                    name : el.name + ' cloned'
+                }
             },
-            list2String(){
-              return JSON.stringify(this.list2, null, 2);
+            removeJob: function(jobs, index) {
+                // Remove job from GUI
+                jobs.splice(index, 1);
+            },
+            log: function (evt){
+                console.log(evt)
             }
-          },
-          watch: {
-            isDragging (newValue) {
-              if (newValue){
-                this.delayedDragging= true
-                return
-              }
-              this.$nextTick( () =>{
-                   this.delayedDragging =false
-              })
-            }
-          }
+        }
     }
 </script>
 
 <style scoped>
+    ul{
+        padding: 0;
+    }
+    li{
+       list-style-type :none;
+    }
     .el-col{
         margin-bottom:16px;
     }
@@ -179,31 +236,52 @@
     }
     .widget-warehouse-body{
         padding: 10px;
+        height: 100%;
     }
-    .flip-list-move {
-      transition: transform 0.5s;
+    .Grid {
+        display: flex;
+        flex-wrap: row wrap;
+        padding-right: 10px;
+        margin-top: 10px;
+        min-height: 200px;
     }
+    .Grid-cell {
+        position: relative;
+        flex: 1;
+        height: 30px;
+        min-height: 200px;
+        border-radius: 5px;
+        background: #ffffff;
+        overflow: hidden;
+        margin-left: 10px;
+        -webkit-transition: height 0.2s ease,flex 0.2s ease; /* For Safari 3.1 to 6.0 */
+        transition: height 0.2s ease,flex 0.2s ease;
+    }
+    .widget-warehouse-list{
+        min-height: 400px;
+        background: #ffffff;
+        border-radius: 5px;
+        margin-top: 10px;
+        padding: 10px;
+    }
+    .widget-warehouse-list-item{
 
-    .no-move {
-      transition: transform 0s;
+        height: 40px;
+        line-height: 40px;
+        padding: 10px;
+        background: #99A9BF;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        color: #ffffff;
     }
-
-    .ghost {
-      opacity: .5;
-      background: #C8EBFB;
+    .set-btn{
+        position: absolute;
+        top: 5px;
+        right: 65px;
     }
-
-    .list-group {
-      min-height: 20px;
-      border:1px solid #000;
-      height: 300px;
-    }
-
-    .list-group-item {
-      cursor: move;
-    }
-
-    .list-group-item i{
-      cursor: pointer;
+    .del-btn{
+        position: absolute;
+        top: 5px;
+        right: 5px;
     }
 </style>

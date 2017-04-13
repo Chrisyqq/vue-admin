@@ -1,18 +1,20 @@
 <template>
     <div >
-        <v-pageTitle vtitle="账单分析"></v-pageTitle>
+        <v-pageTitle vtitle="show">show</v-pageTitle>
 
         <el-row>
             <el-col :span="24">
                 <div class="dx-widget-all">
-                    <div class="Grid" v-for="item in widget">
-                        <div v-for="grid in item.list" class="Grid-cell" v-bind:style="{height: grid.height + 'px' ,flex: grid.width,}">
-                            <el-button v-if="grid.singerSmall === 'true'" type="primary" size="small" @click.active="singerSmallClick">最小化</el-button>
-                            <el-button v-if="grid.multipleSmall === 'true'" type="primary" size="small" @click.active="multipleSmallClick">最小化</el-button>
-                            <keep-alive>
-                              <component :is="grid.name">
-                              </component>
-                            </keep-alive>
+                    <div class="Grid">
+                        <div class="Grid-cell" v-for="item in widget" v-bind:style="{height: item.height + 'px' ,width: item.width + '%'}">
+
+                                    <el-button v-if="item.singerSmall === 'true'" type="primary" size="small" @click.active="singerSmallClick">最小化</el-button>
+                                    <el-button v-if="item.multipleSmall === 'true'" type="primary" size="small" @click.active="multipleSmallClick">最小化</el-button>
+                                    <keep-alive>
+                                      <component :is="item.name">
+                                      </component>
+                                    </keep-alive>
+
                         </div>
                     </div>
                 </div>
@@ -37,63 +39,46 @@
         data: () => ({
             widget: [
                 {
-                    list:[
-                        {
-                            width : '50',
-                            height : '450',
-                            singerSmall : 'false',
-                            multipleSmall : 'false',
-                            color: "green",
-                            name: "todoList"
-                        },
-                        {
-                            width : '50',
-                            height : '450',
-                            singerSmall : 'false',
-                            multipleSmall : 'true',
-                            color: "pink",
-                            name: "radarChart"
-
-                        }
-                    ],
-                    show: "false"
+                    width : '30',
+                    height : '450',
+                    singerSmall : 'false',
+                    multipleSmall : 'false',
+                    color: "green",
+                    name: "todoList"
+                },
+                {
+                    width : '30',
+                    height : '450',
+                    singerSmall : 'false',
+                    multipleSmall : 'true',
+                    color: "pink",
+                    name: "radarChart"
 
                 },
                 {
-                    list:[
-                        {
-                            width : '1',
-                            height : '450',
-                            singerSmall : 'false',
-                            multipleSmall : 'true',
-                            color: "green",
-                            name: "radarChart"
-                        },
-                        {
-                            width : '1',
-                            height : '450',
-                            singerSmall : 'false',
-                            multipleSmall : 'true',
-                            color: "pink",
-                            name: "pieChart"
-                        }
-                    ],
-                    show: "false"
+                    width : '30',
+                    height : '450',
+                    singerSmall : 'false',
+                    multipleSmall : 'true',
+                    color: "green",
+                    name: "radarChart"
                 },
                 {
-                    list:[
-                        {
-                            width : '2',
-                            height : '450',
-                            singerSmall : 'true',
-                            multipleSmall : 'false',
-                            color: "green",
-                            name: "barChart"
-                        }
-                    ],
-                    show: "false"
+                    width : '30',
+                    height : '450',
+                    singerSmall : 'false',
+                    multipleSmall : 'true',
+                    color: "pink",
+                    name: "pieChart"
+                },
+                {
+                    width : '50',
+                    height : '450',
+                    singerSmall : 'true',
+                    multipleSmall : 'false',
+                    color: "green",
+                    name: "barChart"
                 }
-
             ]
         }),
         components:{
@@ -216,20 +201,29 @@
     }
     .Grid {
         display: flex;
-        flex-wrap: row wrap;
-        padding-right: 10px;
+        flex-flow: row wrap;
         margin-top: 10px;
     }
 
     .Grid-cell {
-        flex: 1;
+        margin-top: 10px;
         height: 30px;
-        border-radius: 5px;
-        background: #ffffff;
         overflow: hidden;
-        margin-left: 10px;
         -webkit-transition: height 0.2s ease,flex 0.2s ease; /* For Safari 3.1 to 6.0 */
         transition: height 0.2s ease,flex 0.2s ease;
+    }
+    .Grid-cell-all{
+        height: 100%;
+        padding-left: 5px;
+        padding-right: 5px;
+        overflow: hidden;
+    }
+    .Grid-cell-all-background{
+        padding-left: 5px;
+        padding-right: 5px;
+        background: #ffffff;
+        border-radius: 5px;
+        height: 100%;
     }
     .Grid-width-none{
         -webkit-transition: flex 0.2s ease; /* For Safari 3.1 to 6.0 */
