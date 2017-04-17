@@ -25,8 +25,6 @@ export default new Router({
           path:'/homePage',
           component:homePage
         }
-
-
       ]
     }
   ]

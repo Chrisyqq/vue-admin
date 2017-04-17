@@ -57,7 +57,7 @@
                                 </keep-alive>
                             </div>
                          </draggable>
-
+                        <el-button class="" @click="" type="success" size="large">添加</el-button>
                         <el-dialog title="客户信息设置" v-model="dialogVisible" size="tiny">
                             <el-tabs v-model="activeName" @tab-click="handleClick">
                                 <el-tab-pane label="UI" name="first">
@@ -106,14 +106,11 @@
 
             </el-col>
         </el-row>
-
     </div>
-
-
-
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     import barChart from '../charts/barChart.vue';
     import todoList from '../todoList/TodoList.vue';
     import radarChart from '../charts/radarChart.vue';
@@ -123,23 +120,24 @@
     import vPageTitle from '../common/pageTitle.vue';
     export default {
         data: () => ({
-            list1:[{name:"barChart", id:1},
-                    {name:"todoList", id:2},
-                    {name:"radarChart", id:3},
-                    {name:"pieChart", id:4} ],
-            list2:[{name:"pieChart", id:5},
-                    {name:"todoList", id:6},
-                    {name:"todoList", id:7} ],
-            list3:[{name:"pieChart", id:8},
-                    {name:"todoList", id:9},
-                    {name:"todoList", id:10} ],
-            list4:[{name:"todoList", id:8},
-                    {name:"todoList", id:9},
-                    {name:"pieChart", id:10} ],
-            dialogVisible: false,
+            dialogVisible: false
         }),
         components:{
           barChart,todoList,radarChart,pieChart,vPageTitle,draggable
+        },
+        computed: {
+              list1 () {
+                  return this.$store.state.list1
+                },
+              list2 () {
+                  return this.$store.state.list2
+                },
+              list3 () {
+                  return this.$store.state.list3
+                },
+              list4 () {
+                  return this.$store.state.list4
+                }
         },
         methods: {
             add: function(){

@@ -2,12 +2,10 @@
     <div class="sidebar">
         <el-menu :default-active="onRoutes" class="el-menu-vertical-demo" theme="white" unique-opened router>
             <el-menu-item index="homePage">
-                    <span class="sb-icon"><i class="material-icons">home</i></span>
                     <span class="sb-cn">首页</span>
             </el-menu-item>
 
             <el-menu-item index="crateDom">
-                <span class="sb-icon"><i class="material-icons">perm_data_setting</i></span>
                 <span class="sb-cn">场景建模</span>
             </el-menu-item>
         </el-menu>
