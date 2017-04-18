@@ -1,12 +1,11 @@
 <template>
     <div >
         <v-pageTitle vtitle="账单分析"></v-pageTitle>
-
         <el-row>
             <el-col :span="24">
                 <div class="dx-widget-all">
-                    <div class="Grid" v-for="item in widget">
-                        <div v-for="grid in item.list" class="Grid-cell" v-bind:style="{height: grid.height + 'px' ,flex: grid.width,}">
+                    <div class="Grid" v-for="(item, index) in widgets" v-if="index !== 'list1'">
+                        <div v-for="(grid, index) in item" class="Grid-cell" v-bind:style="{height: grid.height + 'px' ,flex: grid.width,}">
                             <el-button v-if="grid.singerSmall === 'true'" type="primary" size="small" @click.active="singerSmallClick">最小化</el-button>
                             <el-button v-if="grid.multipleSmall === 'true'" type="primary" size="small" @click.active="multipleSmallClick">最小化</el-button>
                             <keep-alive>
@@ -18,8 +17,6 @@
                 </div>
             </el-col>
         </el-row>
-
-
     </div>
 
 
@@ -27,6 +24,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     import barChart from '../charts/barChart.vue';
     import todoList from '../todoList/TodoList.vue';
     import radarChart from '../charts/radarChart.vue';
@@ -35,70 +33,15 @@
     import homePage from '../page/homePage.vue';
     export default {
         data: () => ({
-            widget: [
-                {
-                    list:[
-                        {
-                            width : '50',
-                            height : '450',
-                            singerSmall : 'false',
-                            multipleSmall : 'false',
-                            color: "green",
-                            name: "todoList"
-                        },
-                        {
-                            width : '50',
-                            height : '450',
-                            singerSmall : 'false',
-                            multipleSmall : 'true',
-                            color: "pink",
-                            name: "radarChart"
 
-                        }
-                    ],
-                    show: "false"
-
-                },
-                {
-                    list:[
-                        {
-                            width : '1',
-                            height : '450',
-                            singerSmall : 'false',
-                            multipleSmall : 'true',
-                            color: "green",
-                            name: "radarChart"
-                        },
-                        {
-                            width : '1',
-                            height : '450',
-                            singerSmall : 'false',
-                            multipleSmall : 'true',
-                            color: "pink",
-                            name: "pieChart"
-                        }
-                    ],
-                    show: "false"
-                },
-                {
-                    list:[
-                        {
-                            width : '2',
-                            height : '450',
-                            singerSmall : 'true',
-                            multipleSmall : 'false',
-                            color: "green",
-                            name: "barChart"
-                        }
-                    ],
-                    show: "false"
-                }
-
-            ]
         }),
         components:{
             vPageTitle, homePage,barChart,pieChart,radarChart,todoList
         },
+        computed:
+            mapGetters([
+                'widgets'
+            ]),
         methods: {
             singerSmallClick: function (event) {
                 if(event.target.tagName=='BUTTON'){

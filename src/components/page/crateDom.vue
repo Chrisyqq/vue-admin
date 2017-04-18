@@ -19,11 +19,11 @@
                     </div>
                     <div class="create-page-body">
                         <h2>List 1</h2>
-                        <draggable id="list2" :list="list2" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
-                            <div class="Grid-cell" v-for="(element, index)  in list2"  :key="index">
+                        <draggable id="list2" :list="widgets.list2" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list2"  :key="index">
                                 {{element.name}}
                                 <el-button class="set-btn" @click="dialogVisible = true" type="success" size="mini">设置</el-button>
-                                <el-button class="del-btn" v-on:click="removeJob(list2,index)" type="success" size="mini">删除</el-button>
+                                <el-button class="del-btn" v-on:click="removeJob(widgets.list2,index)" type="success" size="mini">删除</el-button>
                                 <keep-alive>
                                   <component :is="element.name">
                                   </component>
@@ -32,11 +32,11 @@
                          </draggable>
 
                         <h2>List 2</h2>
-                        <draggable id="list3" :list="list3" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
-                            <div class="Grid-cell" v-for="(element, index)  in list3"  :key="index">
+                        <draggable id="list3" :list="widgets.list3" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list3"  :key="index">
                                 {{element.name}}
                                 <el-button class="set-btn" @click="dialogVisible = true" type="success" size="mini">设置</el-button>
-                                <el-button class="del-btn" v-on:click="removeJob(list3,index)" type="success" size="mini">删除</el-button>
+                                <el-button class="del-btn" v-on:click="removeJob(widgets.list3,index)" type="success" size="mini">删除</el-button>
                                 <keep-alive>
                                   <component :is="element.name">
                                   </component>
@@ -45,19 +45,18 @@
                          </draggable>
 
                         <h2>List 3</h2>
-                        <draggable id="list4" :list="list4" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
-                            <div class="Grid-cell" v-for="(element, index)  in list4"  :key="index">
+                        <draggable id="list4" :list="widgets.list4" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list4"  :key="index">
                                 {{element.name}}
                                 <el-button class="set-btn" @click="dialogVisible = true" type="success" size="mini">设置</el-button>
 
-                                <el-button class="del-btn" v-on:click="removeJob(list4,index)" type="success" size="mini">删除</el-button>
+                                <el-button class="del-btn" v-on:click="removeJob(widgets.list4,index)" type="success" size="mini">删除</el-button>
                                 <keep-alive>
                                   <component :is="element.name">
                                   </component>
                                 </keep-alive>
                             </div>
                          </draggable>
-                        <el-button class="" @click="" type="success" size="large">添加</el-button>
                         <el-dialog title="客户信息设置" v-model="dialogVisible" size="tiny">
                             <el-tabs v-model="activeName" @tab-click="handleClick">
                                 <el-tab-pane label="UI" name="first">
@@ -96,8 +95,8 @@
                     </div>
                     <div class="widget-warehouse-body">
                         <el-input v-model="input" placeholder="请输入内容"></el-input>
-                        <draggable id="list1" :list="list1" class="dragArea widget-warehouse-list" :options="{group:{name:'people', pull:'clone', put:false }}" @change="log">
-                            <div class="widget-warehouse-list-item" v-for="(element, index) in list1"  :key="index">
+                        <draggable id="list1" :list="widgets.list1" class="dragArea widget-warehouse-list" :options="{group:{name:'people', pull:'clone', put:false }}" @change="log">
+                            <div class="widget-warehouse-list-item" v-for="(element, index) in widgets.list1"  :key="index">
                                 {{element.name}} {{index}}
                             </div>
                          </draggable>
@@ -125,20 +124,10 @@
         components:{
           barChart,todoList,radarChart,pieChart,vPageTitle,draggable
         },
-        computed: {
-              list1 () {
-                  return this.$store.state.list1
-                },
-              list2 () {
-                  return this.$store.state.list2
-                },
-              list3 () {
-                  return this.$store.state.list3
-                },
-              list4 () {
-                  return this.$store.state.list4
-                }
-        },
+        computed:
+            mapGetters([
+                'widgets'
+            ]),
         methods: {
             add: function(){
                 this.list.push({name:'Juan'});

@@ -13,12 +13,9 @@ Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
-  store,
   el: '#app',
+  store,
   router,
   template: '<App/>',
-  components: { App },
-  beforeCreate:function(){
-    console.log('beforeCreated.....');
-  }
+  components: { App }
 });

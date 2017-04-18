@@ -6,39 +6,39 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const state = {
-    list1:[{name:"barChart", id:1},
-        {name:"todoList", id:2},
-        {name:"radarChart", id:3},
-        {name:"pieChart", id:4} ],
-    list2:[{name:"pieChart", id:5},
-        {name:"todoList", id:6},
-        {name:"todoList", id:7} ],
-    list3:[{name:"pieChart", id:8},
-        {name:"todoList", id:9},
-        {name:"todoList", id:10} ],
-    list4:[]
-}
+const store = new Vuex.Store({
+    state: {
+        widgets: {
+            list1:[
+                {name:"barChart", id:1},
+                {name:"todoList", id:2},
+                {name:"radarChart", id:3},
+                {name:"pieChart", id:4}
+            ],
+            list2:[
 
-const mutations = {}
+            ],
+            list3:[
 
-const gatters = {
-    list1: state => {
-        return state.list1
+            ],
+            list4:[
+                
+            ]
+        }
     },
-    list2: state => {
-        return state.list2
+    actions: {
     },
-    list3: state => {
-        return state.list3
+    mutations: {
     },
-    list4: state => {
-        return state.list4
+    getters: {
+        widgets: state => {
+            return state.widgets
+        }
+    },
+    modules: {
+
     }
-}
-
-export default new Vuex.Store({
-    state,
-    mutations,
-    gatters
 })
+
+
+export default store
