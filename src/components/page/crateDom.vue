@@ -18,11 +18,10 @@
                         <el-button type="success" size="mini">修改名称与编码</el-button>
                     </div>
                     <div class="create-page-body">
-                        <h2>List 1</h2>
                         <draggable id="list2" :list="widgets.list2" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list2"  :key="index">
                                 {{element.name}}
-                                <el-button class="set-btn" @click="dialogVisible = true" type="success" size="mini">设置</el-button>
+                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" type="success" size="mini">设置</el-button>
                                 <el-button class="del-btn" v-on:click="removeJob(widgets.list2,index)" type="success" size="mini">删除</el-button>
                                 <keep-alive>
                                   <component :is="element.name">
@@ -30,12 +29,10 @@
                                 </keep-alive>
                             </div>
                          </draggable>
-
-                        <h2>List 2</h2>
                         <draggable id="list3" :list="widgets.list3" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list3"  :key="index">
                                 {{element.name}}
-                                <el-button class="set-btn" @click="dialogVisible = true" type="success" size="mini">设置</el-button>
+                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" type="success" size="mini">设置</el-button>
                                 <el-button class="del-btn" v-on:click="removeJob(widgets.list3,index)" type="success" size="mini">删除</el-button>
                                 <keep-alive>
                                   <component :is="element.name">
@@ -43,12 +40,10 @@
                                 </keep-alive>
                             </div>
                          </draggable>
-
-                        <h2>List 3</h2>
                         <draggable id="list4" :list="widgets.list4" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list4"  :key="index">
                                 {{element.name}}
-                                <el-button class="set-btn" @click="dialogVisible = true" type="success" size="mini">设置</el-button>
+                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" type="success" size="mini">设置</el-button>
 
                                 <el-button class="del-btn" v-on:click="removeJob(widgets.list4,index)" type="success" size="mini">删除</el-button>
                                 <keep-alive>
@@ -57,34 +52,7 @@
                                 </keep-alive>
                             </div>
                          </draggable>
-                        <el-dialog title="客户信息设置" v-model="dialogVisible" size="tiny">
-                            <el-tabs v-model="activeName" @tab-click="handleClick">
-                                <el-tab-pane label="UI" name="first">
-                                    <el-row :gutter="20">
-                                        <el-col :span="8"><el-input v-model="input" placeholder="请输入内容"></el-input></el-col>
-                                        <el-col :span="8"><el-input v-model="input" placeholder="请输入内容"></el-input></el-col>
-                                    </el-row>
-                                    <el-row :gutter="20">
-                                        <el-col :span="6"><el-checkbox v-model="checked">备选项</el-checkbox></el-col>
-                                        <el-col :span="6"><el-checkbox v-model="checked">备选项</el-checkbox></el-col>
-                                    </el-row>
-                                    <el-row :gutter="20">
-                                        <el-col :span="6"><el-color-picker v-model="color1"></el-color-picker></el-col>
-                                        <el-col :span="6"><el-color-picker v-model="color1"></el-color-picker></el-col>
-                                    </el-row>
-                                </el-tab-pane>
-                                <el-tab-pane label="配置管理" name="second">
-
-                                </el-tab-pane>
-                                <el-tab-pane label="锚点" name="third">
-
-                                </el-tab-pane>
-                            </el-tabs>
-                            <span slot="footer" class="dialog-footer">
-                                <el-button @click="dialogVisible = false">取 消</el-button>
-                                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-                            </span>
-                        </el-dialog>
+                         <dxAlertBoxSet></dxAlertBoxSet>
                     </div>
                 </div>
             </el-col>
@@ -122,11 +90,12 @@
             dialogVisible: false
         }),
         components:{
-          barChart,todoList,radarChart,pieChart,vPageTitle,draggable
+          barChart,todoList,radarChart,pieChart,vPageTitle,draggable,dxAlertBoxSet
         },
         computed:
             mapGetters([
-                'widgets'
+                'widgets',
+                'dxAlert'
             ]),
         methods: {
             add: function(){

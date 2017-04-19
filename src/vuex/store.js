@@ -22,8 +22,11 @@ const store = new Vuex.Store({
 
             ],
             list4:[
-                
+
             ]
+        },
+        dxAlert:{
+            dialogVisible: false
         }
     },
     actions: {
@@ -33,6 +36,9 @@ const store = new Vuex.Store({
     getters: {
         widgets: state => {
             return state.widgets
+        },
+        dxAlert: state => {
+            return state.dxAlert
         }
     },
     modules: {
