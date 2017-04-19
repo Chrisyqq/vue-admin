@@ -5,7 +5,7 @@
             <el-col :span="24">
                 <div class="dx-widget-all">
                     <div class="Grid" v-for="(item, index) in widgets" v-if="index !== 'list1'">
-                        <div v-for="(grid, index) in item" class="Grid-cell" v-bind:style="{height: grid.height + 'px' ,flex: grid.width,}">
+                        <div v-for="(grid, index) in item" class="Grid-cell" v-bind:style="{height: grid.inputHeight + 'px' ,flex: grid.inputWidth,}">
                             <el-button v-if="grid.singerSmall === 'true'" type="primary" size="small" @click.active="singerSmallClick">最小化</el-button>
                             <el-button v-if="grid.multipleSmall === 'true'" type="primary" size="small" @click.active="multipleSmallClick">最小化</el-button>
                             <keep-alive>

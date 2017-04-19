@@ -10,10 +10,10 @@ const store = new Vuex.Store({
     state: {
         widgets: {
             list1:[
-                {name:"barChart", id:1},
-                {name:"todoList", id:2},
-                {name:"radarChart", id:3},
-                {name:"pieChart", id:4}
+                {name:"barChart", id:1,inputHeight:"200",inputWidth:"",shrink:"",placeholder:"",byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""},
+                {name:"todoList", id:2,inputHeight:"200",inputWidth:"",shrink:"",placeholder:"",byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""},
+                {name:"radarChart", id:3,inputHeight:"200",inputWidth:"",shrink:"",placeholder:"",byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""},
+                {name:"pieChart", id:4,inputHeight:"200",inputWidth:"",shrink:"",placeholder:"",byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""}
             ],
             list2:[
 

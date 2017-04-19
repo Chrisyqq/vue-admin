@@ -18,10 +18,10 @@
                         <el-button type="success" size="mini">修改名称与编码</el-button>
                     </div>
                     <div class="create-page-body">
-                        <draggable id="list2" :list="widgets.list2" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
-                            <div class="Grid-cell" v-for="(element, index)  in widgets.list2"  :key="index">
+                        <draggable id="list2" :list="widgets.list2" class="dragAra Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex: widgets.list2[index].inputWidth, height: widgets.list2[index].inputHeight + 'px' }">
                                 {{element.name}}
-                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" type="success" size="mini">设置</el-button>
+                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list2',index)" type="success" size="mini">设置</el-button>
                                 <el-button class="del-btn" v-on:click="removeJob(widgets.list2,index)" type="success" size="mini">删除</el-button>
                                 <keep-alive>
                                   <component :is="element.name">
@@ -30,9 +30,9 @@
                             </div>
                          </draggable>
                         <draggable id="list3" :list="widgets.list3" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
-                            <div class="Grid-cell" v-for="(element, index)  in widgets.list3"  :key="index">
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list3" name="index" :key="index" v-bind:style="{ flex: widgets.list3[index].inputWidth, height: widgets.list3[index].inputHeight + 'px' }">
                                 {{element.name}}
-                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" type="success" size="mini">设置</el-button>
+                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list3',index)" type="success" size="mini">设置</el-button>
                                 <el-button class="del-btn" v-on:click="removeJob(widgets.list3,index)" type="success" size="mini">删除</el-button>
                                 <keep-alive>
                                   <component :is="element.name">
@@ -41,9 +41,9 @@
                             </div>
                          </draggable>
                         <draggable id="list4" :list="widgets.list4" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
-                            <div class="Grid-cell" v-for="(element, index)  in widgets.list4"  :key="index">
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list4" name="index"  :key="index" v-bind:style="{ flex: widgets.list4[index].inputWidth, height: widgets.list4[index].inputHeight + 'px' }">
                                 {{element.name}}
-                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" type="success" size="mini">设置</el-button>
+                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list4',index)" type="success" size="mini">设置</el-button>
 
                                 <el-button class="del-btn" v-on:click="removeJob(widgets.list4,index)" type="success" size="mini">删除</el-button>
                                 <keep-alive>
@@ -52,7 +52,7 @@
                                 </keep-alive>
                             </div>
                          </draggable>
-                         <dxAlertBoxSet></dxAlertBoxSet>
+                         <dxAlertBoxSet v-bind:alert="lalertM"></dxAlertBoxSet>
                     </div>
                 </div>
             </el-col>
@@ -87,7 +87,11 @@
     import vPageTitle from '../common/pageTitle.vue';
     export default {
         data: () => ({
-            dialogVisible: false
+            dialogVisible: false,
+            lalertM:{
+                listTitle: "",
+                listNum: ""
+            }
         }),
         components:{
           barChart,todoList,radarChart,pieChart,vPageTitle,draggable,dxAlertBoxSet
@@ -109,9 +113,13 @@
                     name : el.name + ' cloned'
                 }
             },
-            removeJob: function(jobs, index) {
+            removeJob: function(jobs,index) {
                 // Remove job from GUI
                 jobs.splice(index, 1);
+            },
+            changeAlert: function(name,index) {
+                this.lalertM.listNum=index;
+                this.lalertM.listTitle=name;
             },
             log: function (evt){
                 console.log(evt)
