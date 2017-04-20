@@ -33,7 +33,7 @@
     export default {
         data() {
             return {
-                activeName: first,
+                activeName: "first",
                 inputHeight:"",
                 inputWidth:"",
                 shrink:"",
@@ -57,16 +57,30 @@
             changeAlert() {
                 let listTitle=this.alert.listTitle;
                 let listNum=this.alert.listNum;
-
-                this.widgets.list2[0].inputHeight = this.inputHeight;
-                console.log(this.widgets.list2[1])
-                this.widgets[listTitle][listNum].inputWidth = this.inputWidth;
-                this.widgets[listTitle][listNum].shrink = this.shrink;
-                this.widgets[listTitle][listNum].placeholder = this.placeholder;
-                this.widgets[listTitle][listNum].byMyselfOne = this.byMyselfOne;
-                this.widgets[listTitle][listNum].byMyselfTwo = this.byMyselfTwo;
-                this.widgets[listTitle][listNum].byMyselfThree = this.byMyselfThree;
-                this.widgets[listTitle][listNum].byMyselfFour = this.byMyselfFour;
+                if(this.inputHeight !== ""){
+                    this.widgets[listTitle][listNum].inputHeight = this.inputHeight;
+                }
+                if(this.inputWidth !== ""){
+                    this.widgets[listTitle][listNum].inputWidth = this.inputWidth;
+                }
+                if(this.shrink !== ""){
+                    this.widgets[listTitle][listNum].shrink = this.shrink;
+                }
+                if(this.placeholder !== ""){
+                    this.widgets[listTitle][listNum].placeholder = this.placeholder;
+                }
+                if(this.byMyselfOne !== ""){
+                    this.widgets[listTitle][listNum].byMyselfOne = this.byMyselfOne;
+                }
+                if(this.byMyselfTwo !== ""){
+                    this.widgets[listTitle][listNum].byMyselfTwo = this.byMyselfTwo;
+                }
+                if(this.byMyselfThree !== ""){
+                    this.widgets[listTitle][listNum].byMyselfThree = this.byMyselfThree;
+                }
+                if(this.byMyselfFour !== ""){
+                    this.widgets[listTitle][listNum].byMyselfFour = this.byMyselfFour;
+                }
             }
         }
     }

@@ -6,9 +6,8 @@
                 <div class="dx-widget-all">
                     <div class="Grid" v-for="(item, index) in widgets" v-if="index !== 'list1'">
                         <div v-for="(grid, index) in item" class="Grid-cell" v-bind:style="{height: grid.inputHeight + 'px' ,flex: grid.inputWidth,}">
-                            <el-button v-if="grid.singerSmall === 'true'" type="primary" size="small" @click.active="singerSmallClick">最小化</el-button>
-                            <el-button v-if="grid.multipleSmall === 'true'" type="primary" size="small" @click.active="multipleSmallClick">最小化</el-button>
-                            <keep-alive>
+                            <el-button v-if="grid.shrink === true" type="primary" size="small" v-on:click="ifClick(item.length)">最小化</el-button>
+                            <keep-alive v-if="grid.placeholder === false">
                               <component :is="grid.name">
                               </component>
                             </keep-alive>
@@ -43,44 +42,45 @@
                 'widgets'
             ]),
         methods: {
-            singerSmallClick: function (event) {
-                if(event.target.tagName=='BUTTON'){
-                    if(event.target.textContent=='最大化'){
-                        event.target.parentNode.className='Grid-cell';
-                        event.target.textContent='最小化';
+            ifClick: function(length){
+                if(length>1){
+                    if(event.target.tagName=='BUTTON'){
+                        if(event.target.textContent=='最大化'){
+                            event.target.parentNode.className='Grid-cell';
+                            event.target.textContent='最小化';
+                        }else{
+                            event.target.parentNode.className+=' Grid-width-none';
+                            event.target.textContent='最大化';
+                        }
                     }else{
-                        event.target.parentNode.className+=' Grid-height-none';
-                        event.target.textContent='最大化';
+                        if(event.target.textContent=='最大化'){
+                            event.target.parentNode.parentNode.className='Grid-cell';
+                            event.target.textContent='最小化';
+                        }else{
+                            event.target.parentNode.parentNode.className+=' Grid-width-none';
+                            event.target.textContent='最大化';
+                        }
+
                     }
                 }else{
-                    if(event.target.textContent=='最大化'){
-                        event.target.parentNode.parentNode.className='Grid-cell';
-                        event.target.textContent='最小化';
+                    if(event.target.tagName=='BUTTON'){
+                        if(event.target.textContent=='最大化'){
+                            event.target.parentNode.className='Grid-cell';
+                            event.target.textContent='最小化';
+                        }else{
+                            event.target.parentNode.className+=' Grid-height-none';
+                            event.target.textContent='最大化';
+                        }
                     }else{
-                        event.target.parentNode.parentNode.className+=' Grid-height-none';
-                        event.target.textContent='最大化';
-                    }
+                        if(event.target.textContent=='最大化'){
+                            event.target.parentNode.parentNode.className='Grid-cell';
+                            event.target.textContent='最小化';
+                        }else{
+                            event.target.parentNode.parentNode.className+=' Grid-height-none';
+                            event.target.textContent='最大化';
+                        }
 
-                }
-            },
-            multipleSmallClick: function (event) {
-                if(event.target.tagName=='BUTTON'){
-                    if(event.target.textContent=='最大化'){
-                        event.target.parentNode.className='Grid-cell';
-                        event.target.textContent='最小化';
-                    }else{
-                        event.target.parentNode.className+=' Grid-width-none';
-                        event.target.textContent='最大化';
                     }
-                }else{
-                    if(event.target.textContent=='最大化'){
-                        event.target.parentNode.parentNode.className='Grid-cell';
-                        event.target.textContent='最小化';
-                    }else{
-                        event.target.parentNode.parentNode.className+=' Grid-width-none';
-                        event.target.textContent='最大化';
-                    }
-
                 }
             }
         }

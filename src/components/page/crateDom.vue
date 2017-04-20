@@ -18,35 +18,28 @@
                         <el-button type="success" size="mini">修改名称与编码</el-button>
                     </div>
                     <div class="create-page-body">
-                        <draggable id="list2" :list="widgets.list2" class="dragAra Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                        <draggable id="list2" :list="widgets.list2" class="dragAra Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex: widgets.list2[index].inputWidth, height: widgets.list2[index].inputHeight + 'px' }">
-                                {{element.name}}
                                 <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list2',index)" type="success" size="mini">设置</el-button>
-                                <el-button class="del-btn" v-on:click="removeJob(widgets.list2,index)" type="success" size="mini">删除</el-button>
-                                <keep-alive>
+                                <keep-alive v-if="widgets.list2[index].placeholder === false">
                                   <component :is="element.name">
                                   </component>
                                 </keep-alive>
                             </div>
                          </draggable>
-                        <draggable id="list3" :list="widgets.list3" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                        <draggable id="list3" :list="widgets.list3" class="dragArea Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list3" name="index" :key="index" v-bind:style="{ flex: widgets.list3[index].inputWidth, height: widgets.list3[index].inputHeight + 'px' }">
-                                {{element.name}}
                                 <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list3',index)" type="success" size="mini">设置</el-button>
-                                <el-button class="del-btn" v-on:click="removeJob(widgets.list3,index)" type="success" size="mini">删除</el-button>
-                                <keep-alive>
+                                <keep-alive v-if="widgets.list3[index].placeholder === false">
                                   <component :is="element.name">
                                   </component>
                                 </keep-alive>
                             </div>
                          </draggable>
-                        <draggable id="list4" :list="widgets.list4" class="dragArea Grid"  :options="{group:{name:'people', put:true }}"@change="log">
+                        <draggable id="list4" :list="widgets.list4" class="dragArea Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list4" name="index"  :key="index" v-bind:style="{ flex: widgets.list4[index].inputWidth, height: widgets.list4[index].inputHeight + 'px' }">
-                                {{element.name}}
                                 <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list4',index)" type="success" size="mini">设置</el-button>
-
-                                <el-button class="del-btn" v-on:click="removeJob(widgets.list4,index)" type="success" size="mini">删除</el-button>
-                                <keep-alive>
+                                <keep-alive v-if="widgets.list4[index].placeholder === false">
                                   <component :is="element.name">
                                   </component>
                                 </keep-alive>
@@ -62,8 +55,8 @@
                         <span>Widget库</span>
                     </div>
                     <div class="widget-warehouse-body">
-                        <el-input v-model="input" placeholder="请输入内容"></el-input>
-                        <draggable id="list1" :list="widgets.list1" class="dragArea widget-warehouse-list" :options="{group:{name:'people', pull:'clone', put:false }}" @change="log">
+                        <el-input v-model="widgetSearch" placeholder="请输入内容"></el-input>
+                        <draggable id="list1" :list="widgets.list1" class="dragArea widget-warehouse-list" :options="{group:{name:'people', pull:'add', put:true }}" @change="backWidget">
                             <div class="widget-warehouse-list-item" v-for="(element, index) in widgets.list1"  :key="index">
                                 {{element.name}} {{index}}
                             </div>
@@ -88,6 +81,8 @@
     export default {
         data: () => ({
             dialogVisible: false,
+            listStart: 5,
+            widgetSearch:"",
             lalertM:{
                 listTitle: "",
                 listNum: ""
@@ -103,7 +98,7 @@
             ]),
         methods: {
             add: function(){
-                this.list.push({name:'Juan'});
+                this.list.push();
             },
             replace: function(){
                 this.list=[{name:'Edgard'}]
@@ -112,17 +107,26 @@
                 return {
                     name : el.name + ' cloned'
                 }
+
+
             },
             removeJob: function(jobs,index) {
-                // Remove job from GUI
-                jobs.splice(index, 1);
+
+            },
+            delWidget: function(evt) {
+
             },
             changeAlert: function(name,index) {
                 this.lalertM.listNum=index;
                 this.lalertM.listTitle=name;
             },
-            log: function (evt){
-                console.log(evt)
+            backWidget: function (evt){
+                if(evt.removed){
+                    this.widgets.list1.splice(evt.removed.oldIndex,0,{name:evt.removed.element.name,inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""});
+                }
+                if(this.widgets.list1.length>4){
+                    this.widgets.list1.splice(evt.added.newIndex,1);
+                }
             }
         }
     }
@@ -241,7 +245,8 @@
     .set-btn{
         position: absolute;
         top: 5px;
-        right: 65px;
+        right: 5px;
+        z-index: 100;
     }
     .del-btn{
         position: absolute;
