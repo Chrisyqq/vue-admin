@@ -5,12 +5,15 @@
             <el-col :span="24">
                 <div class="dx-widget-all">
                     <div class="Grid" v-for="(item, index) in widgets" v-if="index !== 'list1'">
-                        <div v-for="(grid, index) in item" class="Grid-cell" v-bind:style="{height: grid.inputHeight + 'px' ,flex: grid.inputWidth,}">
-                            <el-button v-if="grid.shrink === true" type="primary" size="small" v-on:click="ifClick(item.length)">最小化</el-button>
-                            <keep-alive v-if="grid.placeholder === false">
-                              <component :is="grid.name">
-                              </component>
-                            </keep-alive>
+                        <div v-for="(grid, index) in item" class="Grid-cell" v-bind:style="{height: grid.inputHeight + 'px' ,flex:'0' + ' 0 ' + grid.inputWidth + '%',}">
+                            <div class="Grid-cell-box">
+                                <el-button v-if="grid.shrink === true" type="primary" size="small" v-on:click="ifClick(item.length)">最小化</el-button>
+                                <keep-alive v-if="grid.placeholder === false">
+                                  <component :is="grid.name">
+                                  </component>
+                                </keep-alive>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -167,12 +170,15 @@
     .Grid-cell {
         flex: 1;
         height: 30px;
-        border-radius: 5px;
-        background: #ffffff;
         overflow: hidden;
-        margin-left: 10px;
+        border-radius: 5px;
         -webkit-transition: height 0.2s ease,flex 0.2s ease; /* For Safari 3.1 to 6.0 */
         transition: height 0.2s ease,flex 0.2s ease;
+    }
+    .Grid-cell-box{
+        background: #ffffff;
+        border-radius: 5px;
+        margin-left: 10px;
     }
     .Grid-width-none{
         -webkit-transition: flex 0.2s ease; /* For Safari 3.1 to 6.0 */

@@ -19,33 +19,39 @@
                     </div>
                     <div class="create-page-body">
                         <draggable id="list2" :list="widgets.list2" class="dragAra Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
-                            <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex: widgets.list2[index].inputWidth, height: widgets.list2[index].inputHeight + 'px' }">
-                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list2',index)" type="success" size="mini">设置</el-button>
-                                <keep-alive v-if="widgets.list2[index].placeholder === false">
-                                  <component :is="element.name">
-                                  </component>
-                                </keep-alive>
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex:'0' + ' 0 ' + widgets.list2[index].inputWidth + '%', height: widgets.list2[index].inputHeight + 'px' }">
+                                <div class="Grid-cell-box">
+                                    <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list2',index)" type="success" size="mini">设置</el-button>
+                                    <keep-alive v-if="widgets.list2[index].placeholder === false">
+                                      <component :is="element.name">
+                                      </component>
+                                    </keep-alive>
+                                </div>
                             </div>
                          </draggable>
                         <draggable id="list3" :list="widgets.list3" class="dragArea Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list3" name="index" :key="index" v-bind:style="{ flex: widgets.list3[index].inputWidth, height: widgets.list3[index].inputHeight + 'px' }">
-                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list3',index)" type="success" size="mini">设置</el-button>
-                                <keep-alive v-if="widgets.list3[index].placeholder === false">
-                                  <component :is="element.name">
-                                  </component>
-                                </keep-alive>
+                                <div class="Grid-cell-box">
+                                    <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list3',index)" type="success" size="mini">设置</el-button>
+                                    <keep-alive v-if="widgets.list3[index].placeholder === false">
+                                        <component :is="element.name">
+                                        </component>
+                                    </keep-alive>
+                                </div>
                             </div>
                          </draggable>
                         <draggable id="list4" :list="widgets.list4" class="dragArea Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
-                            <div class="Grid-cell" v-for="(element, index)  in widgets.list4" name="index"  :key="index" v-bind:style="{ flex: widgets.list4[index].inputWidth, height: widgets.list4[index].inputHeight + 'px' }">
-                                <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list4',index)" type="success" size="mini">设置</el-button>
-                                <keep-alive v-if="widgets.list4[index].placeholder === false">
-                                  <component :is="element.name">
-                                  </component>
-                                </keep-alive>
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list4" name="index"  :key="index" v-bind:style="{ width: widgets.list4[index].inputWidth + '%', height: widgets.list4[index].inputHeight + 'px' }">
+                                <div class="Grid-cell-box">
+                                    <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list4',index)" type="success" size="mini">设置</el-button>
+                                    <keep-alive v-if="widgets.list4[index].placeholder === false">
+                                      <component :is="element.name">
+                                      </component>
+                                    </keep-alive>
+                                </div>
                             </div>
                          </draggable>
-                         <dxAlertBoxSet v-bind:alert="lalertM"></dxAlertBoxSet>
+                         <dxAlertBoxSet v-bind:alert="lalertM" ref="dxAlertMethod"></dxAlertBoxSet>
                     </div>
                 </div>
             </el-col>
@@ -119,6 +125,7 @@
             changeAlert: function(name,index) {
                 this.lalertM.listNum=index;
                 this.lalertM.listTitle=name;
+                this.$refs.dxAlertMethod.comeIn();
             },
             backWidget: function (evt){
                 if(evt.removed){
@@ -217,13 +224,17 @@
         position: relative;
         flex: 1;
         height: 30px;
-        min-height: 200px;
         border-radius: 5px;
-        background: #ffffff;
         overflow: hidden;
-        margin-left: 10px;
         -webkit-transition: height 0.2s ease,flex 0.2s ease; /* For Safari 3.1 to 6.0 */
         transition: height 0.2s ease,flex 0.2s ease;
+    }
+    .Grid-cell-box{
+        background: #ffffff;
+        border-radius: 5px;
+        margin-left: 10px;
+        overflow: hidden;
+        height: 100%;
     }
     .widget-warehouse-list{
         min-height: 400px;

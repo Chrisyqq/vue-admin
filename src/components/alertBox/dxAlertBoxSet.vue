@@ -7,14 +7,14 @@
                     <el-col :span="8"><el-input v-model="inputWidth" placeholder="请输入宽度%"></el-input></el-col>
                 </el-row>
                 <el-row :gutter="20">
-                    <el-col :span="6"><el-checkbox v-model="shrink">可收缩</el-checkbox></el-col>
-                    <el-col :span="6"><el-checkbox v-model="placeholder">占位显示</el-checkbox></el-col>
+                    <el-col :span="6"><el-checkbox @change="handleShrinkChange" v-model="shrink">可收缩</el-checkbox></el-col>
+                    <el-col :span="6"><el-checkbox @change="handlePlaceholderChange" v-model="placeholder">占位显示</el-checkbox></el-col>
                 </el-row>
                 <el-row :gutter="20">
-                    <el-col :span="8"><el-input v-model="byMyselfOne" placeholder="自定义参数"></el-input></el-col>
-                    <el-col :span="8"><el-input v-model="byMyselfTwo" placeholder="自定义参数"></el-input></el-col>
-                    <el-col :span="8"><el-input v-model="byMyselfThree" placeholder="自定义参数"></el-input></el-col>
-                    <el-col :span="8"><el-input v-model="byMyselfFour" placeholder="自定义参数"></el-input></el-col>
+                    <el-col :span="8"><el-input v-model="byMyselfOne" :placeholder="'自定义参数'"></el-input></el-col>
+                    <el-col :span="8"><el-input v-model="byMyselfTwo" :placeholder="'自定义参数'"></el-input></el-col>
+                    <el-col :span="8"><el-input v-model="byMyselfThree" :placeholder="'自定义参数'"></el-input></el-col>
+                    <el-col :span="8"><el-input v-model="byMyselfFour" :placeholder="'自定义参数'"></el-input></el-col>
                 </el-row>
             </el-tab-pane>
             <el-tab-pane label="配置管理" name="second">
@@ -57,29 +57,38 @@
             changeAlert() {
                 let listTitle=this.alert.listTitle;
                 let listNum=this.alert.listNum;
-                if(this.inputHeight !== ""){
-                    this.widgets[listTitle][listNum].inputHeight = this.inputHeight;
+
+                this.widgets[listTitle][listNum].inputHeight = this.inputHeight;
+                this.widgets[listTitle][listNum].inputWidth = this.inputWidth;
+                this.widgets[listTitle][listNum].shrink = this.shrink;
+                this.widgets[listTitle][listNum].placeholder = this.placeholder;
+                this.widgets[listTitle][listNum].byMyselfOne = this.byMyselfOne;
+                this.widgets[listTitle][listNum].byMyselfTwo = this.byMyselfTwo;
+                this.widgets[listTitle][listNum].byMyselfThree = this.byMyselfThree;
+                this.widgets[listTitle][listNum].byMyselfFour = this.byMyselfFour;
+            },
+            comeIn() {
+                let listTitle=this.alert.listTitle;
+                let listNum=this.alert.listNum;
+
+                this.inputHeight = this.widgets[listTitle][listNum].inputHeight;
+                this.inputWidth = this.widgets[listTitle][listNum].inputWidth;
+                this.shrink = this.widgets[listTitle][listNum].shrink;
+                this.placeholder = this.widgets[listTitle][listNum].placeholder;
+                this.byMyselfOne = this.widgets[listTitle][listNum].byMyselfOne;
+                this.byMyselfTwo = this.widgets[listTitle][listNum].byMyselfTwo;
+                this.byMyselfThree = this.widgets[listTitle][listNum].byMyselfThree;
+                this.byMyselfFour = this.widgets[listTitle][listNum].byMyselfFour;
+
+            },
+            handleShrinkChange(event) {
+                if(event.target.checked){
+                    this.placeholder=false;
                 }
-                if(this.inputWidth !== ""){
-                    this.widgets[listTitle][listNum].inputWidth = this.inputWidth;
-                }
-                if(this.shrink !== ""){
-                    this.widgets[listTitle][listNum].shrink = this.shrink;
-                }
-                if(this.placeholder !== ""){
-                    this.widgets[listTitle][listNum].placeholder = this.placeholder;
-                }
-                if(this.byMyselfOne !== ""){
-                    this.widgets[listTitle][listNum].byMyselfOne = this.byMyselfOne;
-                }
-                if(this.byMyselfTwo !== ""){
-                    this.widgets[listTitle][listNum].byMyselfTwo = this.byMyselfTwo;
-                }
-                if(this.byMyselfThree !== ""){
-                    this.widgets[listTitle][listNum].byMyselfThree = this.byMyselfThree;
-                }
-                if(this.byMyselfFour !== ""){
-                    this.widgets[listTitle][listNum].byMyselfFour = this.byMyselfFour;
+            },
+            handlePlaceholderChange(event) {
+                if(event.target.checked){
+                    this.shrink=false;
                 }
             }
         }
