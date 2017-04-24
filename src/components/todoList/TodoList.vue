@@ -15,8 +15,7 @@
 
 <script>
     import vPageTitle from '../common/pageTitle.vue';
-    
-    
+
 
    
     export default {

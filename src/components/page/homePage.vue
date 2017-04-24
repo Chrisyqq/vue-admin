@@ -35,7 +35,6 @@
     import homePage from '../page/homePage.vue';
     export default {
         data: () => ({
-
         }),
         components:{
             vPageTitle, homePage,barChart,pieChart,radarChart,todoList

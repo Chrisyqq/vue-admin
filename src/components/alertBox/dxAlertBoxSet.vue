@@ -17,8 +17,33 @@
                     <el-col :span="8"><el-input v-model="byMyselfFour" :placeholder="'自定义参数'"></el-input></el-col>
                 </el-row>
             </el-tab-pane>
-            <el-tab-pane label="配置管理" name="second">
-
+            <el-tab-pane label="输入数据" name="second">
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <div class="list" v-for="item in mustData" @mouseover="hoverOn">
+                            <div class="list-word">
+                                <div class="list-head">{{item.chineseName}}</div>
+                                <div class="list-middle">{{item.englishName}}</div>
+                            </div>
+                            <div class="list-del">删除</div>
+                        </div>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-input
+                          placeholder="请选择"
+                          icon="search"
+                          v-model="key">
+                        </el-input>
+                        <div class="list-all">
+                            <div class="list" v-for="(item, key) in filterShoppingList" @click="selected(key)">
+                                <div class="list-word">
+                                    <div class="list-head">{{item.chineseName}}</div>
+                                    <div class="list-middle">{{item.englishName}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </el-col>
+                </el-row>
             </el-tab-pane>
         </el-tabs>
         <span slot="footer" class="dialog-footer">
@@ -30,6 +55,7 @@
 
 <script>
     import { mapGetters } from 'vuex';
+    import todoList from '../todoList/TodoList.vue';
     export default {
         data() {
             return {
@@ -41,15 +67,41 @@
                 byMyselfOne:"",
                 byMyselfTwo:"",
                 byMyselfThree:"",
-                byMyselfFour:""
+                byMyselfFour:"",
+                inputData:[
+                    {chineseName: "小白",englishName: "small red"},
+                    {chineseName: "小黑",englishName: "small black"},
+                    {chineseName: "小黄",englishName: "small yellow"},
+                    {chineseName: "小蓝",englishName: "small blue"},
+                    {chineseName: "小紫",englishName: "small purple"},
+                    {chineseName: "小紫",englishName: "small purple"},
+                    {chineseName: "小紫",englishName: "small purple"}
+                ],
+                mustData:[
+                    {chineseName: "小红",englishName: "small red"}
+                ],
+                key: ''
             }
         },
+        components:{
+            todoList
+        },
         props: ['alert'],
-        computed:
-        mapGetters([
-            'widgets',
-            'dxAlert'
-        ]),
+        computed: {
+            widgets () {
+                return this.$store.getters.widgets
+            },
+            dxAlert () {
+                return this.$store.getters.dxAlert
+            },
+            filterShoppingList: function () {
+                var key = this.key;
+                var inputData = this.inputData;
+                return inputData.filter(function (item) {
+                    return item.chineseName.toLowerCase().indexOf(key.toLowerCase()) != -1 || item.englishName.toLowerCase().indexOf(key.toLowerCase()) != -1
+                });;
+            }
+        },
         methods: {
             handleClick(tab, event) {
                 console.log(tab, event);
@@ -90,6 +142,14 @@
                 if(event.target.checked){
                     this.shrink=false;
                 }
+            },
+            selected(key) {
+                this.mustData.push(this.inputData[key])
+            },
+            hoverOn(event) {
+            console.log(event.target.parentNode.childNodes[0])
+                event.target.parentNode.style="transform: rotateX(-90deg);"
+                event.target.parentNode.childNodes[2].style="transform: rotateX(0deg);"
             }
         }
     }
@@ -99,5 +159,61 @@
 </script>
 
 <style>
-    
+    .list{
+        position: relative;
+        width: 100%;
+        height: 36px;
+        float: left;
+        color: #ffffff;
+        margin-bottom: 5px;
+        transition:all 0.5s;
+        -moz-transition:all 0.5s;
+        -o-transition:all 0.5s;
+        -webkit-transition:all 0.5s;
+    }
+    .list-head{
+        width: 50%;
+        float: left;
+        text-align: center;
+        background: #475669;
+    }
+    .list-middle{
+        width: 50%;
+        float: left;
+        text-align: center;
+        background: #99A9BF;
+    }
+    .list-all{
+        width: 100%;
+        height: 225px;
+        margin-top: 5px;
+        overflow: scroll;
+    }
+    .list-word{
+        width: 100%;
+        height: 36px;
+        float: left;
+        line-height: 36px;
+        border-radius: 5px;
+        overFlow: hidden;
+        transition:all 0.5s;
+        -moz-transition:all 0.5s;
+        -o-transition:all 0.5s;
+        -webkit-transition:all 0.5s;
+    }
+    .list-del{
+        width: 100%;
+        position: absolute;
+        height: 36px;
+        line-height: 36px;
+        border-radius: 5px;
+        left: 0;
+        text-align: center;
+        background: #FF4949;
+        transition:all 0.5s;
+        -moz-transition:all 0.5s liner 0.5;
+        -o-transition:all 0.5s liner 0.5;
+        -webkit-transition:all 0.5s liner 0.5;
+        transform: rotateX(-90deg);
+    }
 </style>

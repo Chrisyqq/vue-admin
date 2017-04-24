@@ -61,7 +61,7 @@
                         <span>Widget库</span>
                     </div>
                     <div class="widget-warehouse-body">
-                        <el-input v-model="widgetSearch" placeholder="请输入内容"></el-input>
+                        <el-input icon="search" v-model="widgetSearch" placeholder="请输入内容"></el-input>
                         <draggable id="list1" :list="widgets.list1" class="dragArea widget-warehouse-list" :options="{group:{name:'people', pull:'add', put:true }}" @change="backWidget">
                             <div class="widget-warehouse-list-item" v-for="(element, index) in widgets.list1"  :key="index">
                                 {{element.name}} {{index}}
