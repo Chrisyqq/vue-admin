@@ -20,12 +20,14 @@
             <el-tab-pane label="输入数据" name="second">
                 <el-row :gutter="20">
                     <el-col :span="12">
-                        <div class="list" v-for="item in mustData" @mouseover="hoverOn">
-                            <div class="list-word">
-                                <div class="list-head">{{item.chineseName}}</div>
-                                <div class="list-middle">{{item.englishName}}</div>
+                        <div class="list flip-container" v-for="item in mustData">
+                            <div class="flipper">
+                                <div class="front">
+                                    <div class="list-head">{{item.chineseName}}</div>
+                                    <div class="list-middle">{{item.englishName}}</div>
+                                </div>
+                                <div class="back" @click="">删除</div>
                             </div>
-                            <div class="list-del">删除</div>
                         </div>
                     </el-col>
                     <el-col :span="12">
@@ -36,7 +38,7 @@
                         </el-input>
                         <div class="list-all">
                             <div class="list" v-for="(item, key) in filterShoppingList" @click="selected(key)">
-                                <div class="list-word">
+                                <div class="front">
                                     <div class="list-head">{{item.chineseName}}</div>
                                     <div class="list-middle">{{item.englishName}}</div>
                                 </div>
@@ -145,11 +147,6 @@
             },
             selected(key) {
                 this.mustData.push(this.inputData[key])
-            },
-            hoverOn(event) {
-            console.log(event.target.parentNode.childNodes[0])
-                event.target.parentNode.style="transform: rotateX(-90deg);"
-                event.target.parentNode.childNodes[2].style="transform: rotateX(0deg);"
             }
         }
     }
@@ -159,6 +156,12 @@
 </script>
 
 <style>
+    .list-all{
+        width: 100%;
+        height: 225px;
+        margin-top: 5px;
+        overflow: scroll;
+    }
     .list{
         position: relative;
         width: 100%;
@@ -183,37 +186,52 @@
         text-align: center;
         background: #99A9BF;
     }
-    .list-all{
-        width: 100%;
-        height: 225px;
-        margin-top: 5px;
-        overflow: scroll;
+    .flip-container {
+    	perspective: 1000;
     }
-    .list-word{
-        width: 100%;
+    /* flip the pane when hovered */
+    .flip-container:hover .front{
+        width: 80%;
+    }
+    .flip-container:hover .back{
+        width: 20%;
+
+    }
+
+    /* flip speed goes here */
+    .flipper {
+    	position: relative;
+    }
+
+    /* hide back of pane during swap */
+    .front, .back {
         height: 36px;
+    	line-height: 36px;
+    	border-radius: 5px;
+    	overflow: hidden;
+        transform: width 0.2s;
+        -moz-transition: width 0.2s; /* Firefox 4 */
+        -webkit-transition: width 0.2s; /* Safari 和 Chrome */
+        -o-transition: width 0.2s; /* Opera */
+    }
+
+    /* front pane, placed above back */
+    .front {
+        width: 100%;
         float: left;
-        line-height: 36px;
-        border-radius: 5px;
-        overFlow: hidden;
-        transition:all 0.5s;
-        -moz-transition:all 0.5s;
-        -o-transition:all 0.5s;
-        -webkit-transition:all 0.5s;
-    }
-    .list-del{
-        width: 100%;
         position: absolute;
-        height: 36px;
-        line-height: 36px;
-        border-radius: 5px;
+        top: 0;
         left: 0;
-        text-align: center;
-        background: #FF4949;
-        transition:all 0.5s;
-        -moz-transition:all 0.5s liner 0.5;
-        -o-transition:all 0.5s liner 0.5;
-        -webkit-transition:all 0.5s liner 0.5;
-        transform: rotateX(-90deg);
     }
+
+    /* back, initially hidden pane */
+    .back {
+    	width: 0%;
+    	position: absolute;
+        top: 0;
+        right: 0;
+        background: red;
+        text-align: center;
+        cursor: pointer;
+     }
 </style>
