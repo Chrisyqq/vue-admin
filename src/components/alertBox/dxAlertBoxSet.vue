@@ -20,13 +20,13 @@
             <el-tab-pane label="输入数据" name="second">
                 <el-row :gutter="20">
                     <el-col :span="12">
-                        <div class="list flip-container" v-for="item in mustData">
+                        <div class="list flip-container" v-for="(item,key) in mustData">
                             <div class="flipper">
                                 <div class="front">
                                     <div class="list-head">{{item.chineseName}}</div>
                                     <div class="list-middle">{{item.englishName}}</div>
                                 </div>
-                                <div class="back" @click="">删除</div>
+                                <div class="back" @click="delDate(key)">删除</div>
                             </div>
                         </div>
                     </el-col>
@@ -59,6 +59,7 @@
     import { mapGetters } from 'vuex';
     import todoList from '../todoList/TodoList.vue';
     export default {
+        props: ['alert'],
         data() {
             return {
                 activeName: "first",
@@ -70,25 +71,13 @@
                 byMyselfTwo:"",
                 byMyselfThree:"",
                 byMyselfFour:"",
-                inputData:[
-                    {chineseName: "小白",englishName: "small red"},
-                    {chineseName: "小黑",englishName: "small black"},
-                    {chineseName: "小黄",englishName: "small yellow"},
-                    {chineseName: "小蓝",englishName: "small blue"},
-                    {chineseName: "小紫",englishName: "small purple"},
-                    {chineseName: "小紫",englishName: "small purple"},
-                    {chineseName: "小紫",englishName: "small purple"}
-                ],
-                mustData:[
-                    {chineseName: "小红",englishName: "small red"}
-                ],
-                key: ''
+                mustData:[],
+                key: ""
             }
         },
         components:{
-            todoList
+
         },
-        props: ['alert'],
         computed: {
             widgets () {
                 return this.$store.getters.widgets
@@ -96,11 +85,14 @@
             dxAlert () {
                 return this.$store.getters.dxAlert
             },
+            inputData () {
+                return this.$store.getters.inputData
+            },
             filterShoppingList: function () {
                 var key = this.key;
                 var inputData = this.inputData;
                 return inputData.filter(function (item) {
-                    return item.chineseName.toLowerCase().indexOf(key.toLowerCase()) != -1 || item.englishName.toLowerCase().indexOf(key.toLowerCase()) != -1
+                    return item.chineseName.toLowerCase().indexOf(key.toLowerCase()) != -1 || item.englishName.toLowerCase().indexOf(key.toLowerCase()) != -1;
                 });;
             }
         },
@@ -108,6 +100,7 @@
             handleClick(tab, event) {
                 console.log(tab, event);
             },
+
             changeAlert() {
                 let listTitle=this.alert.listTitle;
                 let listNum=this.alert.listNum;
@@ -120,7 +113,10 @@
                 this.widgets[listTitle][listNum].byMyselfTwo = this.byMyselfTwo;
                 this.widgets[listTitle][listNum].byMyselfThree = this.byMyselfThree;
                 this.widgets[listTitle][listNum].byMyselfFour = this.byMyselfFour;
+                this.widgets[listTitle][listNum].mustData = this.mustData;
+                console.log(this.$store)
             },
+            // 排除警告这样操作 可以排除 第一次渲染的时候 对象找不到的情况 而且分开渲染 数据 多页面的加载速度也有提升
             comeIn() {
                 let listTitle=this.alert.listTitle;
                 let listNum=this.alert.listNum;
@@ -133,6 +129,7 @@
                 this.byMyselfTwo = this.widgets[listTitle][listNum].byMyselfTwo;
                 this.byMyselfThree = this.widgets[listTitle][listNum].byMyselfThree;
                 this.byMyselfFour = this.widgets[listTitle][listNum].byMyselfFour;
+                this.mustData = this.widgets[listTitle][listNum].mustData;
 
             },
             handleShrinkChange(event) {
@@ -146,7 +143,10 @@
                 }
             },
             selected(key) {
-                this.mustData.push(this.inputData[key])
+                this.mustData.push(this.inputData[key]);
+            },
+            delDate(key) {
+                this.mustData.splice(key,1);
             }
         }
     }

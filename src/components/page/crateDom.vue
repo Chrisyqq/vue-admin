@@ -20,6 +20,11 @@
                     <div class="create-page-body">
                         <draggable id="list2" :list="widgets.list2" class="dragAra Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex:'0' + ' 0 ' + widgets.list2[index].inputWidth + '%', height: widgets.list2[index].inputHeight + 'px' }">
+                                <div class="drag-change">
+                                    <div id="dragRight" class="drag-right"></div>
+                                    <div id="dragBottom" class="drag-bottom"></div>
+                                    <div id="dragBoth" class="drag-both"></div>
+                                </div>
                                 <div class="Grid-cell-box">
                                     <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list2',index)" type="success" size="mini">设置</el-button>
                                     <keep-alive v-if="widgets.list2[index].placeholder === false">
@@ -129,7 +134,7 @@
             },
             backWidget: function (evt){
                 if(evt.removed){
-                    this.widgets.list1.splice(evt.removed.oldIndex,0,{name:evt.removed.element.name,inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""});
+                    this.widgets.list1.splice(evt.removed.oldIndex,0,{name:evt.removed.element.name,inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:"",mustData:[]});
                 }
                 if(this.widgets.list1.length>4){
                     this.widgets.list1.splice(evt.added.newIndex,1);
@@ -219,6 +224,7 @@
         padding-right: 10px;
         margin-top: 10px;
         min-height: 200px;
+        position: relative;
     }
     .Grid-cell {
         position: relative;
@@ -228,6 +234,39 @@
         overflow: hidden;
         -webkit-transition: height 0.2s ease,flex 0.2s ease; /* For Safari 3.1 to 6.0 */
         transition: height 0.2s ease,flex 0.2s ease;
+    }
+    .drag-change{
+
+    }
+    .drag-right{
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #000;
+        cursor: e-resize;
+        z-index: 100;
+    }
+    .drag-bottom{
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #000;
+        cursor: s-resize;
+        z-index: 100;
+    }
+    .drag-both{
+        width: 5px;
+        height: 5px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #000;
+        cursor: se-resize;
+        z-index: 100;
     }
     .Grid-cell-box{
         background: #ffffff;

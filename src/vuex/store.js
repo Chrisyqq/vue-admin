@@ -10,10 +10,10 @@ const store = new Vuex.Store({
     state: {
         widgets: {
             list1:[
-                {name:"barChart",inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""},
-                {name:"todoList",inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""},
-                {name:"radarChart",inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""},
-                {name:"pieChart",inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:""}
+                {name:"barChart",inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:"",mustData:[]},
+                {name:"todoList",inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:"",mustData:[]},
+                {name:"radarChart",inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:"",mustData:[]},
+                {name:"pieChart",inputHeight:"200",inputWidth:"",shrink:"",placeholder:false,byMyselfOne:"",byMyselfTwo:"",byMyselfThree:"",byMyselfFour:"",mustData:[]}
             ],
             list2:[
 
@@ -27,7 +27,16 @@ const store = new Vuex.Store({
         },
         dxAlert:{
             dialogVisible: false
-        }
+        },
+        inputData:[
+            {chineseName: "小白",englishName: "small red"},
+            {chineseName: "小黑",englishName: "small black"},
+            {chineseName: "小黄",englishName: "small yellow"},
+            {chineseName: "小蓝",englishName: "small blue"},
+            {chineseName: "小紫",englishName: "small purple"},
+            {chineseName: "小紫",englishName: "small purple"},
+            {chineseName: "小紫",englishName: "small purple"}
+        ]
     },
     actions: {
         
@@ -41,6 +50,9 @@ const store = new Vuex.Store({
         },
         dxAlert: state => {
             return state.dxAlert
+        },
+        inputData: state => {
+            return state.inputData
         }
     },
     modules: {
