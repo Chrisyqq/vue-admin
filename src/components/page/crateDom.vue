@@ -21,9 +21,9 @@
                         <draggable id="list2" :list="widgets.list2" class="dragAra Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex:'0' + ' 0 ' + widgets.list2[index].inputWidth + '%', height: widgets.list2[index].inputHeight + 'px' }">
                                 <div class="drag-change">
-                                    <div id="dragRight" class="drag-right"></div>
-                                    <div id="dragBottom" class="drag-bottom"></div>
-                                    <div id="dragBoth" class="drag-both"></div>
+                                    <div id="dragRight" class="drag-right" v-dragChange></div>
+                                    <div id="dragBottom" class="drag-bottom" v-dragChange></div>
+                                    <div id="dragBoth" class="drag-both" v-dragChange></div>
                                 </div>
                                 <div class="Grid-cell-box">
                                     <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list2',index)" type="success" size="mini">设置</el-button>
@@ -89,6 +89,7 @@
     import dxAlertBoxSet from '../alertBox/dxAlertBoxSet.vue';
     import draggable from 'vuedraggable';
     import vPageTitle from '../common/pageTitle.vue';
+
     export default {
         data: () => ({
             dialogVisible: false,
@@ -106,7 +107,7 @@
             mapGetters([
                 'widgets',
                 'dxAlert'
-            ]),
+        ]),
         methods: {
             add: function(){
                 this.list.push();
