@@ -19,10 +19,10 @@
                     </div>
                     <div class="create-page-body">
                         <draggable id="list2" :list="widgets.list2" class="dragAra Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
-                            <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex:'0' + ' 0 ' + widgets.list2[index].inputWidth + '%', height: widgets.list2[index].inputHeight + 'px' }">
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex:'0' + ' 0 ' + widgets.list2[index].inputWidth + '%', height: widgets.list2[index].inputHeight + 'px' }" @change="changeStyle('list2',index)">
                                 <div class="drag-change">
                                     <div id="dragRight" class="drag-right" v-dragChange></div>
-                                    <div id="dragBottom" class="drag-bottom" v-dragChange></div>
+                                    <div id="dragBottom" class="drag-bottom" :selecteds="widgets.list2[index].height" v-dragChange="{list:'list2',mun:index,widgets}"></div>
                                     <div id="dragBoth" class="drag-both" v-dragChange></div>
                                 </div>
                                 <div class="Grid-cell-box">
@@ -82,6 +82,7 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import store from 'vuex'
     import barChart from '../charts/barChart.vue';
     import todoList from '../todoList/TodoList.vue';
     import radarChart from '../charts/radarChart.vue';
@@ -140,7 +141,48 @@
                 if(this.widgets.list1.length>4){
                     this.widgets.list1.splice(evt.added.newIndex,1);
                 }
+            },
+            changeStyle: function (name,index){
+                console.log(1)
             }
+        },
+        directives :{
+            params: ['selecteds'],
+            dragChange:{
+                inserted:function(el , binding){
+                 var oDiv = el;
+                  oDiv.onmousedown = function(ev){
+                    console.log(this.params.selecteds);
+                    oDiv.parentNode.parentNode.setAttribute('draggable','false');
+                    var height = oDiv.parentNode.parentNode.style.height.substring(0,oDiv.parentNode.parentNode.style.height.length-2);
+                    var width = oDiv.parentNode.parentNode.offsetWidth;
+                    var elId = el.getAttribute('id');
+                    var disX = ev.clientX;
+                    var disY = ev.clientY;
+                      document.onmousemove = function(ev){
+                        var l = ev.clientX-disX;
+                        var t = ev.pageY-disY;
+                        if(elId=='dragRight'){
+                          oDiv.parentNode.parentNode.style.flex="none"
+                          oDiv.parentNode.parentNode.style.width =parseInt(width) +parseInt(l) + 'px';
+                        }
+                        if(elId=='dragBottom'){
+                          oDiv.parentNode.parentNode.style.height =parseInt(height) +parseInt(t) + 'px';
+                          //binding.value.widgets[binding.value.list][binding.value.num].height=parseInt(height) +parseInt(t);
+                        }
+                        if(elId=='dragBoth'){
+                          oDiv.parentNode.parentNode.style.flex="none";
+                          oDiv.parentNode.parentNode.style.height =parseInt(height) +parseInt(t) + 'px';
+                          oDiv.parentNode.parentNode.style.width =parseInt(width) +parseInt(l) + 'px';
+                        }
+                      };
+                      document.onmouseup = function(){
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                      };
+                  };
+                }
+            },
         }
     }
 </script>

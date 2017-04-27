@@ -2,48 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0538f806-26bf-437f-9f62-bdf3f52315b1" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/.editorconfig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/.jshintrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/Gruntfile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/ISSUE_TEMPLATE.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/Sortable.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/Sortable.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/component.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/jquery.binding.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/app.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/app.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/face-01.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/face-02.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/face-03.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/face-04.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/face-05.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/face-06.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/face-07.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/face-08.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/face-09.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/iframe/frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/iframe/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/Sortable/st/og-image.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/vue.draggable/.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/vue.draggable/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/vue.draggable/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/vue.draggable/debug.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/vue.draggable/dist/vuedraggable.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/vue.draggable/dist/vuedraggable.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/vue.draggable/example.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/vue.draggable/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bower_components/vue.draggable/src/vuedraggable.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/page/crateDom.vue" afterPath="$PROJECT_DIR$/src/components/page/crateDom.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vuex/store.js" afterPath="$PROJECT_DIR$/src/vuex/store.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -78,30 +40,42 @@
       <file leaf-file-name="dxAlertBoxSet.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/alertBox/dxAlertBoxSet.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="61" column="22" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="22" />
+            <state relative-caret-position="624">
+              <caret line="104" column="16" selection-start-line="104" selection-start-column="16" selection-end-line="105" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="crateDom.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="crateDom.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/page/crateDom.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="23" column="54" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="54" />
+            <state relative-caret-position="408">
+              <caret line="148" column="18" selection-start-line="148" selection-start-column="8" selection-end-line="148" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="562">
-              <caret line="30" column="88" selection-start-line="30" selection-start-column="88" selection-end-line="30" selection-end-column="88" />
+            <state relative-caret-position="168">
+              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
               <folding>
                 <element signature="e#140#162#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="store.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/vuex/store.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="552">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+              <folding>
+                <element signature="e#40#61#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,10 +124,10 @@
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/components/page/homePage.vue" />
         <option value="$PROJECT_DIR$/src/components/todoList/TodoList.vue" />
-        <option value="$PROJECT_DIR$/src/vuex/store.js" />
         <option value="$PROJECT_DIR$/src/components/alertBox/dxAlertBoxSet.vue" />
-        <option value="$PROJECT_DIR$/src/components/page/crateDom.vue" />
         <option value="$PROJECT_DIR$/src/main.js" />
+        <option value="$PROJECT_DIR$/src/vuex/store.js" />
+        <option value="$PROJECT_DIR$/src/components/page/crateDom.vue" />
       </list>
     </option>
   </component>
@@ -542,7 +516,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172343000" />
+    <option name="totallyTimeSpent" value="180249000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1000" extended-state="0" />
@@ -799,16 +773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/vuex/store.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1392">
-          <caret line="60" column="2" selection-start-line="60" selection-start-column="2" selection-end-line="60" selection-end-column="2" />
-          <folding>
-            <element signature="e#40#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bower_components/Sortable/st/iframe/frame.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -875,30 +839,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/vuedraggable/dist/vuedraggable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/alertBox/dxAlertBoxSet.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="61" column="22" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page/crateDom.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="23" column="54" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -909,11 +849,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="30" column="88" selection-start-line="30" selection-start-column="88" selection-end-line="30" selection-end-column="88" />
+        <state relative-caret-position="168">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
           <folding>
             <element signature="e#140#162#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/alertBox/dxAlertBoxSet.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="104" column="16" selection-start-line="104" selection-start-column="16" selection-end-line="105" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/vuedraggable/dist/vuedraggable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vuex/store.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <element signature="e#40#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/crateDom.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="148" column="18" selection-start-line="148" selection-start-column="8" selection-end-line="148" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

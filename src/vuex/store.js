@@ -38,11 +38,11 @@ const store = new Vuex.Store({
             {chineseName: "小紫",englishName: "small purple"}
         ]
     },
-    actions: {
-        
-    },
     mutations: {
 
+    },
+    actions: {
+        
     },
     getters: {
         widgets: state => {
