@@ -19,11 +19,11 @@
                     </div>
                     <div class="create-page-body">
                         <draggable id="list2" :list="widgets.list2" class="dragAra Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
-                            <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex:'0' + ' 0 ' + widgets.list2[index].inputWidth + '%', height: widgets.list2[index].inputHeight + 'px' }" @change="changeStyle('list2',index)">
+                            <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex:'0' + ' 0 ' + widgets.list2[index].inputWidth + '%', height: widgets.list2[index].inputHeight + 'px' }">
                                 <div class="drag-change">
-                                    <div id="dragRight" class="drag-right" v-dragChange></div>
-                                    <div id="dragBottom" class="drag-bottom" :selecteds="widgets.list2[index].height" v-dragChange="{list:'list2',mun:index,widgets}"></div>
-                                    <div id="dragBoth" class="drag-both" v-dragChange></div>
+                                    <div id="dragRight" class="drag-right" @mousedown="changeStyle(index)"></div>
+                                    <div id="dragBottom" class="drag-bottom" @mousedown="changeStyle(index)"></div>
+                                    <div id="dragBoth" class="drag-both" @mousedown="changeStyle(index)"></div>
                                 </div>
                                 <div class="Grid-cell-box">
                                     <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list2',index)" type="success" size="mini">设置</el-button>
@@ -127,7 +127,6 @@
 
             },
             delWidget: function(evt) {
-
             },
             changeAlert: function(name,index) {
                 this.lalertM.listNum=index;
@@ -143,44 +142,43 @@
                 }
             },
             changeStyle: function (name,index){
-                console.log(1)
+                var oDiv = event.target;
+                oDiv.parentNode.parentNode.setAttribute('draggable','false');
+                var height = oDiv.parentNode.parentNode.style.height.substring(0,oDiv.parentNode.parentNode.style.height.length-2);
+                var width = oDiv.parentNode.parentNode.offsetWidth;
+                var elId = oDiv.getAttribute('id');
+                var disX = event.clientX;
+                var disY = event.clientY;
+                  document.onmousemove = function(ev){
+                    var l = event.clientX-disX;
+                    var t = event.clientY-disY;
+                    if(elId=='dragRight'){
+                      oDiv.parentNode.parentNode.style.flex="none"
+                      oDiv.parentNode.parentNode.style.width =parseInt(width) +parseInt(l) + 'px';
+                    }
+                    if(elId=='dragBottom'){
+                      oDiv.parentNode.parentNode.style.height =parseInt(height) +parseInt(t) + 'px';
+                        this.widgets[title][noIndex].height=parseInt(height) +parseInt(t);
+                        console.log(this.widgets.list2[noIndex].height)
+                    }
+                    if(elId=='dragBoth'){
+                      oDiv.parentNode.parentNode.style.flex="none";
+                      oDiv.parentNode.parentNode.style.height =parseInt(height) +parseInt(t) + 'px';
+                      oDiv.parentNode.parentNode.style.width =parseInt(width) +parseInt(l) + 'px';
+                    }
+                  };
+                  document.onmouseup = function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                  };
             }
         },
         directives :{
-            params: ['selecteds'],
             dragChange:{
                 inserted:function(el , binding){
-                 var oDiv = el;
-                  oDiv.onmousedown = function(ev){
-                    console.log(this.params.selecteds);
-                    oDiv.parentNode.parentNode.setAttribute('draggable','false');
-                    var height = oDiv.parentNode.parentNode.style.height.substring(0,oDiv.parentNode.parentNode.style.height.length-2);
-                    var width = oDiv.parentNode.parentNode.offsetWidth;
-                    var elId = el.getAttribute('id');
-                    var disX = ev.clientX;
-                    var disY = ev.clientY;
-                      document.onmousemove = function(ev){
-                        var l = ev.clientX-disX;
-                        var t = ev.pageY-disY;
-                        if(elId=='dragRight'){
-                          oDiv.parentNode.parentNode.style.flex="none"
-                          oDiv.parentNode.parentNode.style.width =parseInt(width) +parseInt(l) + 'px';
-                        }
-                        if(elId=='dragBottom'){
-                          oDiv.parentNode.parentNode.style.height =parseInt(height) +parseInt(t) + 'px';
-                          //binding.value.widgets[binding.value.list][binding.value.num].height=parseInt(height) +parseInt(t);
-                        }
-                        if(elId=='dragBoth'){
-                          oDiv.parentNode.parentNode.style.flex="none";
-                          oDiv.parentNode.parentNode.style.height =parseInt(height) +parseInt(t) + 'px';
-                          oDiv.parentNode.parentNode.style.width =parseInt(width) +parseInt(l) + 'px';
-                        }
-                      };
-                      document.onmouseup = function(){
-                        document.onmousemove=null;
-                        document.onmouseup=null;
-                      };
-                  };
+
+                },
+                update: function(el, binding, vnode, oldVnode){
                 }
             },
         }
@@ -282,22 +280,20 @@
 
     }
     .drag-right{
-        width: 1px;
+        width: 2px;
         height: 100%;
         position: absolute;
         top: 0;
         right: 0;
-        background: #000;
         cursor: e-resize;
         z-index: 100;
     }
     .drag-bottom{
         width: 100%;
-        height: 1px;
+        height: 2px;
         position: absolute;
         bottom: 0;
         right: 0;
-        background: #000;
         cursor: s-resize;
         z-index: 100;
     }
@@ -307,7 +303,6 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        background: #000;
         cursor: se-resize;
         z-index: 100;
     }
