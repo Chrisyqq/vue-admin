@@ -21,9 +21,9 @@
                         <draggable id="list2" :list="widgets.list2" class="dragAra Grid"  :options="{group:{name:'people', put:true }}" @change="delWidget">
                             <div class="Grid-cell" v-for="(element, index)  in widgets.list2" name="index" :key="index" v-bind:style="{ flex:'0' + ' 0 ' + widgets.list2[index].inputWidth + '%', height: widgets.list2[index].inputHeight + 'px' }">
                                 <div class="drag-change">
-                                    <div id="dragRight" class="drag-right" @mousedown="changeStyle(index)"></div>
-                                    <div id="dragBottom" class="drag-bottom" @mousedown="changeStyle(index)"></div>
-                                    <div id="dragBoth" class="drag-both" @mousedown="changeStyle(index)"></div>
+                                    <div id="dragRight" class="drag-right" @mousedown="changeStyle('list2',index)"></div>
+                                    <div id="dragBottom" class="drag-bottom" @mousedown="changeStyle('list2',index)"></div>
+                                    <div id="dragBoth" class="drag-both" @mousedown="changeStyle('list2',index)"></div>
                                 </div>
                                 <div class="Grid-cell-box">
                                     <el-button class="set-btn" @click="dxAlert.dialogVisible = true" v-on:click="changeAlert('list2',index)" type="success" size="mini">设置</el-button>
@@ -141,36 +141,37 @@
                     this.widgets.list1.splice(evt.added.newIndex,1);
                 }
             },
-            changeStyle: function (name,index){
+            changeStyle: function (title,index){
+                var widgets = this.widgets
                 var oDiv = event.target;
+
                 oDiv.parentNode.parentNode.setAttribute('draggable','false');
-                var height = oDiv.parentNode.parentNode.style.height.substring(0,oDiv.parentNode.parentNode.style.height.length-2);
-                var width = oDiv.parentNode.parentNode.offsetWidth;
+                var oldHeight = oDiv.parentNode.parentNode.style.height.substring(0,oDiv.parentNode.parentNode.style.height.length-2);
+                var oldWidth = oDiv.parentNode.parentNode.offsetWidth;
                 var elId = oDiv.getAttribute('id');
                 var disX = event.clientX;
                 var disY = event.clientY;
-                  document.onmousemove = function(ev){
+                document.onmousemove = function(ev){
                     var l = event.clientX-disX;
                     var t = event.clientY-disY;
                     if(elId=='dragRight'){
-                      oDiv.parentNode.parentNode.style.flex="none"
-                      oDiv.parentNode.parentNode.style.width =parseInt(width) +parseInt(l) + 'px';
+                        oDiv.parentNode.parentNode.style.flex="none"
+                        oDiv.parentNode.parentNode.style.width =parseInt(oldWidth) +parseInt(l) + 'px';
                     }
                     if(elId=='dragBottom'){
-                      oDiv.parentNode.parentNode.style.height =parseInt(height) +parseInt(t) + 'px';
-                        this.widgets[title][noIndex].height=parseInt(height) +parseInt(t);
-                        console.log(this.widgets.list2[noIndex].height)
+                        oDiv.parentNode.parentNode.style.height =parseInt(oldHeight) +parseInt(t) + 'px';
+                        widgets[title][index].inputHeight=parseInt(oldHeight) +parseInt(t);
                     }
                     if(elId=='dragBoth'){
                       oDiv.parentNode.parentNode.style.flex="none";
-                      oDiv.parentNode.parentNode.style.height =parseInt(height) +parseInt(t) + 'px';
-                      oDiv.parentNode.parentNode.style.width =parseInt(width) +parseInt(l) + 'px';
+                      oDiv.parentNode.parentNode.style.height =parseInt(oldHeight) +parseInt(t) + 'px';
+                      oDiv.parentNode.parentNode.style.width =parseInt(oldWidth) +parseInt(l) + 'px';
                     }
-                  };
-                  document.onmouseup = function(){
+                };
+                document.onmouseup = function(){
                     document.onmousemove=null;
                     document.onmouseup=null;
-                  };
+                };
             }
         },
         directives :{
