@@ -5,9 +5,12 @@
             <el-col :span="24">
                 <div class="dx-widget-all">
                     <div class="Grid" v-for="(item, index) in widgets" v-if="index !== 'list1'">
-                        <div v-for="(grid, index) in item" class="Grid-cell" v-bind:style="{height: grid.inputHeight + 'px' ,flex:'0' + ' 0 ' + grid.inputWidth + '%',}">
+                        <div
+                        v-for="(grid, index) in item"
+                        class="Grid-cell"
+                        v-bind:style="{height: grid.inputHeight + 'px' ,flex:'0' + ' 0 ' + grid.inputWidth + '%',}">
                             <div class="Grid-cell-box">
-                                <el-button v-if="grid.shrink === true" type="primary" size="small" v-on:click="ifClick(item.length)">最小化</el-button>
+                                <el-button v-if="grid.shrink === true" type="primary" size="small" @click="ifClick(item.length)">最小化</el-button>
                                 <keep-alive v-if="grid.placeholder === false">
                                   <component :is="grid.name">
                                   </component>
@@ -48,18 +51,18 @@
                 if(length>1){
                     if(event.target.tagName=='BUTTON'){
                         if(event.target.textContent=='最大化'){
-                            event.target.parentNode.className='Grid-cell';
-                            event.target.textContent='最小化';
-                        }else{
-                            event.target.parentNode.className+=' Grid-width-none';
-                            event.target.textContent='最大化';
-                        }
-                    }else{
-                        if(event.target.textContent=='最大化'){
                             event.target.parentNode.parentNode.className='Grid-cell';
                             event.target.textContent='最小化';
                         }else{
                             event.target.parentNode.parentNode.className+=' Grid-width-none';
+                            event.target.textContent='最大化';
+                        }
+                    }else{
+                        if(event.target.textContent=='最大化'){
+                            event.target.parentNode.parentNode.parentNode.className='Grid-cell';
+                            event.target.textContent='最小化';
+                        }else{
+                            event.target.parentNode.parentNode.parentNode.className+=' Grid-width-none';
                             event.target.textContent='最大化';
                         }
 
@@ -67,18 +70,18 @@
                 }else{
                     if(event.target.tagName=='BUTTON'){
                         if(event.target.textContent=='最大化'){
-                            event.target.parentNode.className='Grid-cell';
-                            event.target.textContent='最小化';
-                        }else{
-                            event.target.parentNode.className+=' Grid-height-none';
-                            event.target.textContent='最大化';
-                        }
-                    }else{
-                        if(event.target.textContent=='最大化'){
                             event.target.parentNode.parentNode.className='Grid-cell';
                             event.target.textContent='最小化';
                         }else{
                             event.target.parentNode.parentNode.className+=' Grid-height-none';
+                            event.target.textContent='最大化';
+                        }
+                    }else{
+                        if(event.target.textContent=='最大化'){
+                            event.target.parentNode.parentNode.parentNode.className='Grid-cell';
+                            event.target.textContent='最小化';
+                        }else{
+                            event.target.parentNode.parentNode.parentNode.className+=' Grid-height-none';
                             event.target.textContent='最大化';
                         }
 
@@ -171,10 +174,11 @@
         height: 30px;
         overflow: hidden;
         border-radius: 5px;
-        -webkit-transition: height 0.2s ease,flex 0.2s ease; /* For Safari 3.1 to 6.0 */
-        transition: height 0.2s ease,flex 0.2s ease;
+        -webkit-transition: all 0.2s ease,flex 0.2s ease; /* For Safari 3.1 to 6.0 */
+        transition: all 0.2s ease,flex 0.2s ease;
     }
     .Grid-cell-box{
+        overflow: hidden;
         background: #ffffff;
         border-radius: 5px;
         margin-left: 10px;
@@ -183,9 +187,10 @@
         -webkit-transition: flex 0.2s ease; /* For Safari 3.1 to 6.0 */
         transition: flex 0.2s ease;
         flex: none !important;
-        width: 50px !important;
+        width: 70px !important;
     }
     .Grid-height-none{
+        overflow: hidden;
         -webkit-transition: height 0.2s ease; /* For Safari 3.1 to 6.0 */
         transition: height 0.2s ease;
         height: 30px!important;
