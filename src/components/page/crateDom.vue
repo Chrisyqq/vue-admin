@@ -106,8 +106,7 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
-    import store from 'vuex'
+    import { mapGetters } from 'vuex';
     import barChart from '../charts/barChart.vue';
     import todoList from '../todoList/TodoList.vue';
     import radarChart from '../charts/radarChart.vue';
@@ -135,6 +134,7 @@
                 'dxAlert'
         ]),
         methods: {
+
             add: function(){
                 this.list.push();
             },
@@ -166,10 +166,10 @@
                     this.widgets.list1.splice(evt.added.newIndex,1);
                 }
             },
-            changeStyle: function (title,index){
+            changeStyle: function (title,num){
                 var widgets = this.widgets
                 var oDiv = event.target;
-
+                var that = this;
                 oDiv.parentNode.parentNode.setAttribute('draggable','false');
                 var oldHeight = oDiv.parentNode.parentNode.style.height.substring(0,oDiv.parentNode.parentNode.style.height.length-2);
                 var oldWidth = oDiv.parentNode.parentNode.offsetWidth;
@@ -184,19 +184,25 @@
                     var moveHeight = parseInt(oldHeight) + parseInt(t);
                     if(elId=='dragRight'){
                         if(55<moveWidth && moveWidth<=fatherWidth){
-                            widgets[title][index].inputWidth = moveWidth/fatherWidth*100;
+                            console.log(title,num)
+                            widgets[title][num].inputWidth = moveWidth/fatherWidth*100;
                         }
                     }
                     if(elId=='dragBottom'){
                         if(30<moveHeight){
+                            var list = title;
+                            var index = index;
+                            var typeH = "inputHeight";
+                            var value = parseInt(oldHeight) +parseInt(t);
+                            console.log(list,index,typeH,value)
                             oDiv.parentNode.parentNode.style.height =parseInt(oldHeight) +parseInt(t) + 'px';
-                            widgets[title][index].inputHeight=parseInt(oldHeight) +parseInt(t);
+                            widgets[title][num].inputHeight=parseInt(oldHeight) +parseInt(t);
                         }
                     }
                     if(elId=='dragBoth'){
                         if(55<moveWidth && moveWidth<=fatherWidth && 30<moveHeight){
-                            widgets[title][index].inputWidth = moveWidth/fatherWidth*100;
-                            widgets[title][index].inputHeight=parseInt(oldHeight) +parseInt(t);
+                            widgets[title][num].inputWidth = moveWidth/fatherWidth*100;
+                            widgets[title][num].inputHeight=parseInt(oldHeight) +parseInt(t);
                             oDiv.parentNode.parentNode.style.height =parseInt(oldHeight) +parseInt(t) + 'px';
                         }
                     }

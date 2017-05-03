@@ -39,10 +39,13 @@ const store = new Vuex.Store({
         ]
     },
     mutations: {
-
+        changeDate(state,list,num,typeH,value){
+            
+            state.widgets[list][num][typeH]=value;
+        }
     },
     actions: {
-        
+
     },
     getters: {
         widgets: state => {
@@ -56,9 +59,7 @@ const store = new Vuex.Store({
         }
     },
     modules: {
-
     }
 })
 
-
-export default store
+export default store;
