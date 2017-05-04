@@ -184,26 +184,30 @@
                     var moveHeight = parseInt(oldHeight) + parseInt(t);
                     if(elId=='dragRight'){
                         if(55<moveWidth && moveWidth<=fatherWidth){
-                            console.log(title,num)
-                            widgets[title][num].inputWidth = moveWidth/fatherWidth*100;
+                            var type = "inputWidth";
+                            var value = moveWidth/fatherWidth*100;
+                            var all = {title,num,type,value}
+                            that.$store.commit('changeDate',all);
                         }
                     }
                     if(elId=='dragBottom'){
                         if(30<moveHeight){
-                            var list = title;
-                            var index = index;
-                            var typeH = "inputHeight";
+                            var type = "inputHeight";
                             var value = parseInt(oldHeight) +parseInt(t);
-                            console.log(list,index,typeH,value)
-                            oDiv.parentNode.parentNode.style.height =parseInt(oldHeight) +parseInt(t) + 'px';
-                            widgets[title][num].inputHeight=parseInt(oldHeight) +parseInt(t);
+                            var all = {title,num,type,value}
+                            that.$store.commit('changeDate',all);
                         }
                     }
                     if(elId=='dragBoth'){
                         if(55<moveWidth && moveWidth<=fatherWidth && 30<moveHeight){
-                            widgets[title][num].inputWidth = moveWidth/fatherWidth*100;
-                            widgets[title][num].inputHeight=parseInt(oldHeight) +parseInt(t);
-                            oDiv.parentNode.parentNode.style.height =parseInt(oldHeight) +parseInt(t) + 'px';
+                            var typeOne = "inputHeight";
+                            var typeTwo = "inputWidth";
+                            var valueOne = parseInt(oldHeight) +parseInt(t);
+                            var valueTwo = moveWidth/fatherWidth*100;
+                            var allOne = {title,num,typeOne,valueOne}
+                            var allTwo = {title,num,typeTwo,valueTwo}
+                            that.$store.commit('changeDateBoth',allOne);
+                            that.$store.commit('changeDateBoth',allTwo);
                         }
                     }
                 };

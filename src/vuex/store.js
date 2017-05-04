@@ -39,9 +39,24 @@ const store = new Vuex.Store({
         ]
     },
     mutations: {
-        changeDate(state,list,num,typeH,value){
-            
-            state.widgets[list][num][typeH]=value;
+        changeDate(state,all){
+            var list = all.title;
+            var num = all.num;
+            var type = all.type;
+            var value = all.value;
+            console.log(all)
+            state.widgets[list][num][type] = value;
+        },
+        changeDateBoth(state,all){
+            var list = all.title;
+            var num = all.num;
+            var typeOne = all.typeOne;
+            var typeTwo = all.typeTwo;
+            var valueOne = all.valueOne;
+            var valueTwo = all.valueTwo;
+            console.log(all)
+            state.widgets[list][num][typeOne] = valueOne;
+            state.widgets[list][num][typeTwo] = valueTwo;
         }
     },
     actions: {
